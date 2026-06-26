@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Sistema Financeiro IPDA</title>
+
+<link rel="icon" href="favicon.png">
+
+<style>
+script
+/*==========================
+RESET
+==========================*/
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#eef2f7;
+color:#333;
+overflow-x:hidden;
+}
+
+/*==========================
+DARK MODE
+==========================*/
+
+body.dark{
+background:#111;
+color:#eee;
+}
+
+body.dark .menu{
+background:#091b32;
+}
+
+body.dark .topo,
+body.dark .card,
+body.dark .janela,
+body.dark table,
+body.dark .login-box{
+background:#1d1d1d;
+color:white;
+}
+
+body.dark input,
+body.dark select{
+background:#2c2c2c;
+color:white;
+border:1px solid #444;
+}
+
+body.dark th{
+background:#0d47a1;
+}
+
+/*==========================
+LOGIN
+==========================*/
+
+#login{
+
+position:fixed;
+inset:0;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:url("fundo-login.jpg") center center/cover no-repeat;
+
+}
+
+#login::before{
+
+content:"";
+
+position:absolute;
+inset:0;
+
+background:rgba(0,0,0,.45);
+
+}
+
+.login-box{
+
+position:relative;
+
+width:420px;
+max-width:90%;
+
+padding:40px;
+
+border-radius:25px;
+
+background:rgba(255,255,255,.12);
+
+backdrop-filter:blur(18px);
+
+border:1px solid rgba(255,255,255,.2);
+
+box-shadow:0 15px 40px rgba(0,0,0,.4);
+
+text-align:center;
+
+}
+
+.logo{
+
+width:120px;
+margin-bottom:20px;
+
+}
+
+.login-box h1{
+
+color:white;
+
+font-size:30px;
+
+margin-bottom:8px;
+
+}
+
+.login-box p{
+
+color:white;
+
+opacity:.9;
+
+margin-bottom:30px;
+
+}
+
+.input{
+
+margin-bottom:18px;
+
+}
+
+.input input{
+
+width:100%;
+height:55px;
+
+border:none;
+
+border-radius:12px;
+
+padding-left:15px;
+
+font-size:16px;
+
+}
+
+.btn{
+
+width:100%;
+height:55px;
+
+border:none;
+
+border-radius:12px;
+
+background:#0d47a1;
+
+color:white;
+
+font-size:17px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.btn:hover{
+
+background:#1565c0;
+
+}
+
+#erro{
+
+margin-top:15px;
+
+color:#ffc7c7;
+
+font-weight:bold;
+
+}
+
+/*==========================
+SISTEMA
+==========================*/
+
+#sistema{
+
+display:none;
+
+}
+
+/*==========================
+MENU
+==========================*/
+
+.menu{
+
+position:fixed;
+
+left:0;
+top:0;
+
+width:240px;
+height:100vh;
+
+background:linear-gradient(180deg,#0d47a1,#1565c0);
+
+color:white;
+
+overflow:auto;
+
+}
+
+.menu h2{
+
+padding:25px;
+
+text-align:center;
+
+border-bottom:1px solid rgba(255,255,255,.2);
+
+}
+
+.menu a{
+
+display:block;
+
+padding:16px 20px;
+
+color:white;
+
+text-decoration:none;
+
+cursor:pointer;
+
+transition:.25s;
+
+}
+
+.menu a:hover{
+
+background:rgba(255,255,255,.15);
+
+padding-left:28px;
+
+}
+
+/*==========================
+TOPO
+==========================*/
+
+.topo{
+
+margin-left:240px;
+
+background:white;
+
+padding:18px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+}
+
+.topo h2{
+
+color:#0d47a1;
+
+}
+
+/*==========================
+CONTEÚDO
+==========================*/
+
+.conteudo{
+
+margin-left:240px;
+
+padding:25px;
+
+}
+
+/*==========================
+CARDS
+==========================*/
+
+.grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+
+gap:18px;
+
+margin-top:20px;
+
+}
+
+.card{
+
+background:white;
+
+padding:25px;
+
+border-radius:15px;
+
+text-align:center;
+
+cursor:pointer;
+
+transition:.25s;
+
+box-shadow:0 4px 15px rgba(0,0,0,.08);
+
+}
+
+.card:hover{
+
+transform:translateY(-5px);
+
+}
+
+.card h3{
+
+color:#0d47a1;
+
+}
+
+/*==========================
+JANELA MÊS
+==========================*/
+
+.janela{
+
+display:none;
+
+position:fixed;
+
+inset:0;
+
+background:rgba(0,0,0,.45);
+
+justify-content:center;
+
+align-items:center;
+
+z-index:999;
+
+}
+
+.janela-box{
+
+background:white;
+
+width:900px;
+
+max-width:95%;
+
+border-radius:18px;
+
+padding:25px;
+
+max-height:90vh;
+
+overflow:auto;
+
+}
+
+.janela h2{
+
+margin-bottom:20px;
+
+color:#0d47a1;
+
+}
+
+/*==========================
+TABELA
+==========================*/
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+margin-top:15px;
+
+}
+
+th{
+
+background:#0d47a1;
+
+color:white;
+
+padding:12px;
+
+}
+
+td{
+
+border:1px solid #ddd;
+
+padding:12px;
+
+}
+
+td input{
+
+width:100%;
+
+padding:10px;
+
+border:1px solid #ccc;
+
+border-radius:8px;
+
+}
+
+/*==========================
+BOTÕES
+==========================*/
+
+.botoes{
+
+margin-top:20px;
+
+display:flex;
+
+gap:10px;
+
+}
+
+.salvar{
+
+flex:1;
+
+height:50px;
+
+background:#2e7d32;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}
+
+.limpar{
+
+flex:1;
+
+height:50px;
+
+background:#f57c00;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}
+
+.fechar{
+
+flex:1;
+
+height:50px;
+
+background:#c62828;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}
+
+/*==========================
+RESPONSIVO
+==========================*/
+
+@media(max-width:700px){
+
+.menu{
+
+width:70px;
+
+}
+
+.menu h2{
+
+display:none;
+
+}
+
+.menu a{
+
+font-size:0;
+
+padding:18px;
+
+}
+
+.topo{
+
+margin-left:70px;
+
+}
+
+.conteudo{
+
+margin-left:70px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="login">
+
+<div class="login-box">
+
+<img src="logo-login.png" class="logo">
+
+<h1>SISTEMA FINANCEIRO</h1>
+
+<p>Setorial IPDA</p>
+
+<div class="input">
+
+<input
+id="usuario"
+placeholder="Usuário">
+
+</div>
+
+<div class="input">
+
+<input
+type="password"
+id="senha"
+placeholder="Senha"
+onkeypress="if(event.key=='Enter')logar()">
+
+</div>
+
+<button
+class="btn"
+onclick="logar()">
+
+ENTRAR
+
+</button>
+
+<div id="erro"></div>
+
+</div>
+
+</div>
+
+<div id="sistema">
+
+<div class="menu">
+
+<h2>FINANCEIRO</h2>
+
+<a onclick="abrirDashboard()">Dashboard</a>
+
+<a onclick="alternarDark()">Dark Mode</a>
+
+<a onclick="sair()">Sair</a>
+
+</div>
+
+<div class="topo">
+
+<h2>Sistema Financeiro IPDA</h2>
+
+<select id="ano">
+<option>2026</option>
+<option>2027</option>
+<option>2028</option>
+<option>2029</option>
+<option>2030</option>
+<option>2031</option>
+<option>2032</option>
+<option>2033</option>
+<option>2034</option>
+<option>2035</option>
+<option>2036</option>
+<option>2037</option>
+<option>2038</option>
+<option>2039</option>
+<option>2040</option>
+</select>
+
+<br><br>
+
+<select id="igreja">
+
+<option value="10277">10277 - MG CONTAGEM ELDORADO</option>
+<option value="10336">10336 - MG CONTAGEM RIACHO</option>
+<option value="10341">10341 - MG CONTAGEM PARQUE SÃO JOÃO</option>
+<option value="11804">11804 - MG CONTAGEM MARACANÃ</option>
+<option value="11792">11792 - MG CONTAGEM MARIA DA CONCEIÇÃO</option>
+<option value="11786">11786 - MG CONTAGEM BERNARDO MONTEIRO</option>
+<option value="11790">11790 - MG CONTAGEM DOS FUNCIONÁRIOS</option>
+<option value="11789">11789 - MG CONTAGEM CENTRO</option>
+<option value="11788">11788 - MG CONTAGEM CANADÁ</option>
+<option value="11795">11795 - MG CONTAGEM VILA ITÁLIA</option>
+<option value="11798">11798 - MG CONTAGEM SANTA HELENA</option>
+<option value="18167">18167 - MG CONTAGEM COLONIAL</option>
+<option value="11791">11791 - MG CONTAGEM JARDIM MARROCOS</option>
+<option value="11796">11796 - MG CONTAGEM PRAIA</option>
+<option value="11785">11785 - MG CONTAGEM BELA VISTA E.N.</option>
+<option value="11797">11797 - MG CONTAGEM RECANTO DA MATA</option>
+<option value="10319">10319 - MG CONTAGEM JARDIM DOS BANDEIRANTES</option>
+<option value="10342">10342 - MG CONTAGEM PEROBAS II</option>
+<option value="10322">10322 - MG CONTAGEM DARCY VARGAS</option>
+<option value="10328">10328 - MG CONTAGEM ELDORADO</option>
+<option value="10334">10334 - MG CONTAGEM NOVO ELDORADO</option>
+<option value="10269">10269 - MG CONTAGEM ELDORADO 1</option>
+<option value="10324">10324 - MG CONTAGEM INCONFIDENTES</option>
+<option value="18271">18271 - MG CONTAGEM ELDORADO</option>
+<option value="10363">10363 - MG CONTAGEM SANTA CRUZ</option>
+
+</select>
+
+</div>
+
+<div class="conteudo">
+
+<div id="dashboard">
+
+<h2>Meses</h2>
+
+<div class="grid">
+
+<div class="card" onclick="abrirMes('Janeiro')">
+<h3>Janeiro</h3>
+</div>
+
+<div class="card" onclick="abrirMes('Fevereiro')">
+<h3>Fevereiro</h3>
+</div>
+
+<div class="card" onclick="abrirMes('Março')">
+<h3>Março</h3>
+</div>
+
+<div class="card" onclick="abrirMes('Abril')">
+<h3>Abril</h3>
+</div>
+
+<div class="card" onclick="abrirMes('Maio')">
+<h3>Maio</h3>
+</div>
+
+<div class="card" onclick="abrirMes('Junho')">
+<h3>Junho</h3>
+</div>
+
+<div class="card" onclick="abrirMes('Julho')">
+<h3>Julho</h3>
+</div>
+
+<div class="card" onclick="abrirMes('Agosto')">
+<h3>Agosto</h3>
+</div>
+
+<div class="card" onclick="abrirMes('Setembro')">
+<h3>Setembro</h3>
+</div>
+
+<div class="card" onclick="abrirMes('Outubro')">
+<h3>Outubro</h3>
+</div>
+
+<div class="card" onclick="abrirMes('Novembro')">
+<h3>Novembro</h3>
+</div>
+
+<div class="card" onclick="abrirMes('Dezembro')">
+<h3>Dezembro</h3>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="janela" id="janelaMes">
+
+<div class="janela-box">
+
+<h2 id="tituloMes">
+Janeiro
+</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Campo</th>
+
+<th>Valor (R$)</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Entrada Geral</td>
+
+<td>
+
+<input
+type="text"
+inputmode="numeric"
+id="entrada">
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Dízimo</td>
+
+<td>
+
+<input
+type="text"
+inputmode="numeric"
+id="dizimo">
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Oferta</td>
+
+<td>
+
+<input
+type="text"
+inputmode="numeric"
+id="oferta">
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Transferência</td>
+
+<td>
+
+<input
+type="text"
+inputmode="numeric"
+id="transferencia">
+</td>
+
+</tr>
+
+<tr>
+
+<td>Saída Geral</td>
+
+<td>
+
+<input
+type="text"
+inputmode="numeric"
+id="saida">
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Saldo Depositado</td>
+
+<td>
+
+<input
+type="text"
+inputmode="numeric"
+id="depositado">
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Missões</td>
+
+<td>
+
+<input
+type="text"
+inputmode="numeric"
+id="missoes">
+
+</td>
+
+</tr>
+
+<tr>
+
+<th>Saldo Calculado</th>
+
+<th>
+
+<input
+id="saldo"
+readonly>
+
+</th>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<div class="botoes">
+
+<button
+class="salvar"
+onclick="salvarMes()">
+
+Salvar
+
+</button>
+
+<button
+class="limpar"
+onclick="limparCampos()">
+
+Limpar
+
+</button>
+
+<button
+class="fechar"
+onclick="fecharMes()">
+
+Fechar
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBcjj4oVPr2eMml8kX-9lD6M4XE5j7eCKc",
+    authDomain: "balancosetorial.firebaseapp.com",
+    projectId: "balancosetorial",
+    storageBucket: "balancosetorial.firebasestorage.app",
+    messagingSenderId: "982470800589",
+    appId: "1:982470800589:web:c16d386f11522172fa2584",
+    measurementId: "G-4SDSMMJ082"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+let mesAtual = "Janeiro";
+const dados = {};
+
+// ================= FUNÇÕES =================
+
+function chaveAtual() {
+  return document.getElementById("ano").value + "_" +
+         document.getElementById("igreja").value;
+}
+
+async function logar(){
+
+let email = document.getElementById("usuario").value.trim();
+let senha = document.getElementById("senha").value;
+
+try{
+
+    await signInWithEmailAndPassword(auth, email, senha);
+
+    document.getElementById("login").style.display = "none";
+    document.getElementById("sistema").style.display = "block";
+
+}catch(e){
+
+    document.getElementById("erro").innerHTML =
+    "Usuário ou senha inválidos.";
+
+}
+
+}
+
+  if (u === "12345678" && s === "12345678") {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("sistema").style.display = "block";
+  } else {
+    document.getElementById("erro").innerHTML = "Usuário ou senha inválidos.";
+  }
+}
+
+async function sair(){
+
+await signOut(auth);
+location.reload();
+
+}
+
+function abrirDashboard() {}
+
+function alternarDark() {
+  document.body.classList.toggle("dark");
+}
+
+async function abrirMes(mes){
+
+    mesAtual = mes;
+
+    document.getElementById("tituloMes").innerHTML =
+    "Financeiro - " + mes;
+
+    document.getElementById("janelaMes").style.display = "flex";
+
+    limparCampos();
+
+    const chave = chaveAtual();
+
+    const ref = doc(db, "financeiro", chave + "_" + mesAtual);
+
+    const snap = await getDoc(ref);
+
+    if (snap.exists()) {
+
+        const d = snap.data();
+
+        document.getElementById("entrada").value = d.entrada || "";
+        document.getElementById("dizimo").value = d.dizimo || "";
+        document.getElementById("oferta").value = d.oferta || "";
+        document.getElementById("transferencia").value = d.transferencia || "";
+        document.getElementById("saida").value = d.saida || "";
+        document.getElementById("depositado").value = d.depositado || "";
+        document.getElementById("missoes").value = d.missoes || "";
+
+    }
+
+    calcularSaldo();
+
+}
+
+function fecharMes() {
+  document.getElementById("janelaMes").style.display = "none";
+}
+
+function limparCampos() {
+  document.querySelectorAll("input").forEach(i => i.value = "");
+}
+
+function numero(id){
+
+    return Number(
+        document.getElementById(id).value
+        .replace(/\./g,"")
+        .replace(",",".")
+    ) || 0;
+
+}
+
+function mascaraMoeda(input){
+
+    let valor = input.value.replace(/\D/g,"");
+
+    valor = (Number(valor)/100).toLocaleString("pt-BR",{
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+    });
+
+    input.value = valor;
+
+}
+
+function calcularSaldo() {
+  let entrada = numero("entrada");
+  let dizimo = numero("dizimo");
+  let oferta = numero("oferta");
+  let transferencia = numero("transferencia");
+  let saida = numero("saida");
+  let depositado = numero("depositado");
+  let missoes = numero("missoes");
+
+  let saldo =
+    entrada +
+    dizimo +
+    oferta +
+    transferencia -
+    saida -
+    depositado -
+    missoes;
+
+  document.getElementById("saldo").value = saldo.toFixed(2);
+}
+
+async function salvarMes() {
+
+    try {
+
+        let chave = chaveAtual();
+
+        if (!dados[chave]) {
+            dados[chave] = {};
+        }
+
+        dados[chave][mesAtual] = {
+            entrada: numero("entrada"),
+            dizimo: numero("dizimo"),
+            oferta: numero("oferta"),
+            transferencia: numero("transferencia"),
+            saida: numero("saida"),
+            depositado: numero("depositado"),
+            missoes: numero("missoes"),
+            saldo: numero("saldo")
+        };
+
+        await setDoc(
+            doc(db, "financeiro", chave + "_" + mesAtual),
+            dados[chave][mesAtual]
+        );
+
+        alert("SALVOU!");
+
+    } catch (e) {
+
+        alert("ERRO:\n" + e);
+
+    }
+
+}
+
+// ================== EXPOR GLOBAL ==================
+
+window.logar = logar;
+window.sair = sair;
+window.abrirDashboard = abrirDashboard;
+window.alternarDark = alternarDark;
+window.abrirMes = abrirMes;
+window.fecharMes = fecharMes;
+window.limparCampos = limparCampos;
+window.salvarMes = salvarMes;
+
+// ================== EVENTS ==================
+
+window.addEventListener("load", () => {
+
+  ["entrada","dizimo","oferta","transferencia","saida","depositado","missoes"]
+    .forEach(id => {
+
+      document.getElementById(id).addEventListener("input", function(){
+
+          mascaraMoeda(this);
+          calcularSaldo();
+
+      });
+
+    });
+
+});
+</script>
+
+</body>
+
+</html>
