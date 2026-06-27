@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Sistema de Conferência IPDA</title>
+
+<link rel="icon" href="favicon.png">
+
+<style>
+script
+/*==========================
+RESET
+==========================*/
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#eef2f7;
+color:#333;
+overflow-x:hidden;
+}
+
+/*==========================
+DARK MODE
+==========================*/
+
+body.dark{
+background:#111;
+color:#eee;
+}
+
+body.dark .menu{
+background:#091b32;
+}
+
+body.dark .topo,
+body.dark .card,
+body.dark .janela,
+body.dark table,
+body.dark .login-box{
+background:#1d1d1d;
+color:white;
+}
+
+body.dark input,
+body.dark select{
+background:#2c2c2c;
+color:white;
+border:1px solid #444;
+}
+
+body.dark th{
+background:#0d47a1;
+}
+
+.dashboard-cards{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:18px;
+
+margin-bottom:30px;
+
+}
+
+.dashboard-card{
+
+background:white;
+
+padding:20px;
+
+border-radius:15px;
+
+box-shadow:0 5px 18px rgba(0,0,0,.10);
+
+border-left:6px solid #0d47a1;
+
+}
+
+.dashboard-card h4{
+
+color:#666;
+
+margin-bottom:10px;
+
+}
+
+.dashboard-card h2{
+
+color:#0d47a1;
+
+font-size:28px;
+
+}
+
+/*==========================
+LOGIN
+==========================*/
+
+#login{
+
+position:fixed;
+inset:0;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:url("fundo-login.jpg") center center/cover no-repeat;
+
+}
+
+#login::before{
+
+content:"";
+
+position:absolute;
+inset:0;
+
+background:rgba(0,0,0,.45);
+
+}
+
+.login-box{
+
+position:relative;
+
+width:420px;
+max-width:90%;
+
+padding:40px;
+
+border-radius:25px;
+
+background:rgba(255,255,255,.12);
+
+backdrop-filter:blur(18px);
+
+border:1px solid rgba(255,255,255,.2);
+
+box-shadow:0 15px 40px rgba(0,0,0,.4);
+
+text-align:center;
+
+}
+
+.logo{
+
+width:120px;
+margin-bottom:20px;
+
+}
+
+.login-box h1{
+
+color:white;
+
+font-size:30px;
+
+margin-bottom:8px;
+
+}
+
+.login-box p{
+
+color:white;
+
+opacity:.9;
+
+margin-bottom:30px;
+
+}
+
+.input{
+    margin-bottom:18px;
+}
+
+.input input{
+    display:block;
+    width:100%;
+    height:55px;
+    padding:0 15px;
+    border:none;
+    border-radius:12px;
+    font-size:16px;
+    box-sizing:border-box;
+}
+
+.btn{
+    display:block;
+    width:100%;
+    height:55px;
+    border:none;
+    border-radius:12px;
+    background:#0d47a1;
+    color:#fff;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+    box-sizing:border-box;
+}
+
+.btn:hover{
+
+background:#1565c0;
+
+}
+
+#erro{
+
+margin-top:15px;
+
+color:#ffc7c7;
+
+font-weight:bold;
+
+}
+
+.status{
+
+margin-top:10px;
+
+font-size:14px;
+
+font-weight:bold;
+
+color:#d32f2f;
+
+}
+
+.status.salvo{
+
+color:#2e7d32;
+
+}
+
+.status.andamento{
+
+color:#f57c00;
+
+}
+
+/*==========================
+SISTEMA
+==========================*/
+
+#sistema{
+
+display:none;
+
+}
+
+/*==========================
+MENU
+==========================*/
+
+.menu{
+
+position:fixed;
+
+left:0;
+top:0;
+
+width:240px;
+height:100vh;
+
+background:linear-gradient(180deg,#0d47a1,#1565c0);
+
+color:white;
+
+overflow:auto;
+
+}
+
+.menu h2{
+
+padding:25px;
+
+text-align:center;
+
+border-bottom:1px solid rgba(255,255,255,.2);
+
+}
+
+.menu a{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+padding:14px 18px;
+
+color:white;
+
+text-decoration:none;
+
+cursor:pointer;
+
+transition:.25s;
+
+}
+
+.menu a:hover{
+
+background:rgba(255,255,255,.15);
+
+padding-left:28px;
+
+}
+
+/*==========================
+TOPO
+==========================*/
+
+.topo{
+
+margin-left:240px;
+
+background:white;
+
+padding:18px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+}
+
+.topo h2{
+
+color:#0d47a1;
+
+}
+
+/*==========================
+CONTEÚDO
+==========================*/
+
+.conteudo{
+
+margin-left:240px;
+
+padding:25px;
+
+}
+
+/*==========================
+CARDS
+==========================*/
+
+.grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+
+gap:18px;
+
+margin-top:20px;
+
+}
+
+.card{
+
+background:white;
+
+padding:25px;
+
+border-radius:15px;
+
+text-align:center;
+
+cursor:pointer;
+
+transition:.25s;
+
+box-shadow:0 4px 15px rgba(0,0,0,.08);
+
+}
+
+.card:hover{
+
+transform:translateY(-5px);
+
+}
+
+.card h3{
+
+color:#0d47a1;
+
+}
+
+/*==========================
+JANELA MÊS
+==========================*/
+
+.janela{
+
+display:none;
+
+position:fixed;
+
+inset:0;
+
+background:rgba(0,0,0,.45);
+
+justify-content:center;
+
+align-items:center;
+
+z-index:999;
+
+}
+
+.janela-box{
+
+background:white;
+
+width:900px;
+
+max-width:95%;
+
+border-radius:18px;
+
+padding:25px;
+
+max-height:90vh;
+
+overflow:auto;
+
+}
+
+.janela h2{
+
+margin-bottom:20px;
+
+color:#0d47a1;
+
+}
+
+/*==========================
+TABELA
+==========================*/
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+margin-top:15px;
+
+}
+
+th{
+
+background:#0d47a1;
+
+color:white;
+
+padding:12px;
+
+}
+
+td{
+
+border:1px solid #ddd;
+
+padding:12px;
+
+}
+
+td input{
+
+width:100%;
+
+padding:10px;
+
+border:1px solid #ccc;
+
+border-radius:8px;
+
+}
+
+/*==========================
+BOTÕES
+==========================*/
+
+.botoes{
+
+margin-top:20px;
+
+display:flex;
+
+gap:10px;
+
+}
+
+.salvar{
+
+flex:1;
+
+height:50px;
+
+background:#2e7d32;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}
+
+.limpar{
+
+flex:1;
+
+height:50px;
+
+background:#f57c00;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}
+
+.fechar{
+
+flex:1;
+
+height:50px;
+
+background:#c62828;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}
+
+.logo-menu{
+
+width:70px;
+
+height:70px;
+
+display:block;
+
+margin:20px auto 10px;
+
+}
+
+.menu-icone{
+
+width:22px;
+
+height:22px;
+
+object-fit:contain;
+
+flex-shrink:0;
+
+}
+
+.menu a span{
+
+font-size:15px;
+
+font-weight:500;
+
+}
+
+.menu-footer{
+
+position:absolute;
+
+bottom:20px;
+
+left:0;
+
+width:100%;
+
+text-align:center;
+
+font-size:13px;
+
+opacity:.8;
+
+}
+
+.menu-logo{
+
+text-align:center;
+
+padding:20px 10px;
+
+}
+
+.logo-menu{
+
+width:60px;
+
+height:60px;
+
+object-fit:contain;
+
+display:block;
+
+margin:0 auto 10px;
+
+}
+
+.menu-logo h2{
+
+font-size:18px;
+
+line-height:1.3;
+
+color:white;
+
+font-weight:600;
+
+}
+
+/*==========================
+RESPONSIVO
+==========================*/
+
+@media(max-width:700px){
+
+.menu{
+
+width:70px;
+
+}
+
+.menu h2{
+
+display:none;
+
+}
+
+.menu a{
+
+font-size:0;
+
+padding:18px;
+
+}
+
+.topo{
+
+margin-left:70px;
+
+}
+
+.conteudo{
+
+margin-left:70px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="login">
+
+<div class="login-box">
+
+<img src="logo-login.png" class="logo">
+
+<h1>SISTEMA DE CONFERÊNCIA IPDA</h1>
+
+<p>Setorial IPDA</p>
+
+<div class="input">
+
+<input
+id="usuario"
+placeholder="Usuário">
+
+</div>
+
+<div class="input">
+
+<input
+type="password"
+id="senha"
+placeholder="Senha"
+onkeypress="if(event.key=='Enter')logar()">
+
+</div>
+
+<button
+class="btn"
+onclick="logar()">
+
+ENTRAR
+
+</button>
+
+<div id="erro"></div>
+
+</div>
+
+</div>
+
+<div id="sistema">
+
+<div class="menu">
+<div class="menu-logo">
+
+<img src="logo-menu.png" class="logo-menu">
+
+<h2>Sistema de<br>Conferência</h2>
+
+</div>
+
+<a onclick="abrirDashboard()">
+
+<img src="icone-dashboard.png" class="menu-icone">
+
+<span>Dashboard</span>
+
+</a>
+
+<a onclick="alternarDark()">
+
+<img src="icone-dark.png" class="menu-icone">
+
+<span>Modo Escuro</span>
+
+</a>
+
+<a onclick="sair()">
+
+<img src="icone-sair.png" class="menu-icone">
+
+<span>Sair</span>
+
+</a>
+
+<div class="menu-footer">
+
+Versão 1.0
+
+</div>
+
+</div>
+
+<div class="topo">
+
+<h2>Sistema de Conferência IPDA</h2>
+
+<select id="ano" onchange="controlarMeses()">
+<option>2026</option>
+<option>2027</option>
+<option>2028</option>
+<option>2029</option>
+<option>2030</option>
+<option>2031</option>
+<option>2032</option>
+<option>2033</option>
+<option>2034</option>
+<option>2035</option>
+<option>2036</option>
+<option>2037</option>
+<option>2038</option>
+<option>2039</option>
+<option>2040</option>
+</select>
+
+<br><br>
+<select id="igreja">
+
+<option value="10336">10336 - IPDA JARDIM RIACHO (RIO POTI) REGIONAL</option>
+<option value="10341">10341 - IPDA PARQUE SÃO JOÃO REGIONAL</option>
+<option value="11804">11804 - IPDA JARDIM MARACANÃ REGIONAL</option>
+<option value="11792">11792 - IPDA MARIA DA CONCEIÇÃO REGIONAL</option>
+<option value="11786">11786 - IPDA BERNARDO MONTEIRO REGIONAL</option>
+<option value="11790">11790 - IPDA FUNCIONÁRIOS REGIONAL</option>
+<option value="11788">11788 - IPDA CANADÁ LOCAL</option>
+<option value="11795">11795 - IPDA VILA ITÁLIA LOCAL</option>
+<option value="11798">11798 - IPDA SANTA HELENA LOCAL</option>
+<option value="18167">18167 - IPDA COLONIAL LOCAL</option>
+<option value="11791">11791 - IPDA JARDIM MARROCOS LOCAL</option>
+<option value="11796">11796 - IPDA PRAIA LOCAL</option>
+<option value="11785">11785 - IPDA BELA VISTA LOCAL</option>
+<option value="11797">11797 - IPDA CHÁCARAS DEL REY LOCAL</option>
+<option value="10319">10319 - IPDA JARDIM DOS BANDEIRANTES LOCAL</option>
+<option value="10334">10334 - IPDA NOVO ELDORADO LOCAL</option>
+<option value="10324">10324 - IPDA INCONFIDENTES LOCAL</option>
+<option value="18271">18271 - IPDA ELDORADO II (JOÃO GOMES CARDOSO) LOCAL</option>
+<option value="10363">10363 - IPDA SANTA CRUZ INDUSTRIAL LOCAL</option>
+<option value="10277">10277 - IPDA ELDORADO IV (FIRMO DE MATOS) REGIONAL</option>
+
+</select>
+
+</div>
+
+<div class="conteudo">
+
+<div id="dashboard">
+
+<div class="dashboard-cards">
+
+<div class="dashboard-card">
+
+<h4>Total Entradas</h4>
+
+<h2 id="totalEntradas">R$ 0,00</h2>
+
+</div>
+
+<div class="dashboard-card">
+
+<h4>Total Saídas</h4>
+
+<h2 id="totalSaidas">R$ 0,00</h2>
+
+</div>
+
+<div class="dashboard-card">
+
+<h4>Total Depositado</h4>
+
+<h2 id="totalDepositado">R$ 0,00</h2>
+
+</div>
+
+<div class="dashboard-card">
+
+<h4>Saldo Geral</h4>
+
+<h2 id="saldoGeral">R$ 0,00</h2>
+
+</div>
+
+</div>
+
+<h2>Meses</h2>
+
+<div class="grid">
+
+<div class="card" data-mes="Janeiro" onclick="abrirMes('Janeiro')">
+
+<h3>Janeiro</h3>
+
+<p class="status">Não preenchido</p>
+
+</div>
+
+<div class="card" data-mes="Fevereiro" onclick="abrirMes('Fevereiro')">
+
+<h3>Fevereiro</h3>
+
+<p class="status">Não preenchido</p>
+
+</div>
+
+<div class="card" data-mes="Março" onclick="abrirMes('Março')">
+
+<h3>Março</h3>
+
+<p class="status">Não preenchido</p>
+
+</div>
+
+<div class="card" data-mes="Abril" onclick="abrirMes('Abril')">
+
+<h3>Abril</h3>
+
+<p class="status">Não preenchido</p>
+
+</div>
+
+<div class="card" data-mes="Maio" onclick="abrirMes('Maio')">
+
+<h3>Maio</h3>
+
+<p class="status">Não preenchido</p>
+
+</div>
+
+<div class="card" data-mes="Junho" onclick="abrirMes('Junho')">
+
+<h3>Junho</h3>
+
+<p class="status">Não preenchido</p>
+
+</div>
+
+<div class="card" data-mes="Julho" onclick="abrirMes('Julho')">
+
+<h3>Julho</h3>
+
+<p class="status">Não preenchido</p>
+
+</div>
+
+<div class="card" data-mes="Agosto" onclick="abrirMes('Agosto')">
+
+<h3>Agosto</h3>
+
+<p class="status">Não preenchido</p>
+
+</div>
+
+<div class="card" data-mes="Setembro" onclick="abrirMes('Setembro')">
+
+<h3>Setembro</h3>
+
+<p class="status">Não preenchido</p>
+
+</div>
+
+<div class="card" data-mes="Outubro" onclick="abrirMes('Outubro')">
+
+<h3>Outubro</h3>
+
+<p class="status">Não preenchido</p>
+
+</div>
+
+<div class="card" data-mes="Novembro" onclick="abrirMes('Novembro')">
+
+<h3>Novembro</h3>
+
+<p class="status">Não preenchido</p>
+
+</div>
+
+<div class="card" data-mes="Dezembro" onclick="abrirMes('Dezembro')">
+
+<h3>Dezembro</h3>
+
+<p class="status">Não preenchido</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="janela" id="janelaMes">
+
+<div class="janela-box">
+
+<h2 id="tituloMes">
+Janeiro
+</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Campo</th>
+
+<th>Valor (R$)</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Entrada Geral</td>
+
+<td>
+
+<input
+type="text"
+inputmode="numeric"
+id="entrada">
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Dízimo</td>
+
+<td>
+
+<input
+type="text"
+inputmode="numeric"
+id="dizimo">
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Oferta</td>
+
+<td>
+
+<input
+type="text"
+inputmode="numeric"
+id="oferta">
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Transferência</td>
+
+<td>
+
+<input
+type="text"
+inputmode="numeric"
+id="transferencia">
+</td>
+
+</tr>
+
+<tr>
+
+<td>Saída Geral</td>
+
+<td>
+
+<input
+type="text"
+inputmode="numeric"
+id="saida">
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Saldo Depositado</td>
+
+<td>
+
+<input
+type="text"
+inputmode="numeric"
+id="depositado">
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Missões</td>
+
+<td>
+
+<input
+type="text"
+inputmode="numeric"
+id="missoes">
+
+</td>
+
+</tr>
+
+<tr>
+
+<th>Saldo Calculado</th>
+
+<th>
+
+<input
+id="saldo"
+readonly>
+
+</th>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<div class="botoes">
+
+<button
+class="salvar"
+onclick="salvarMes()">
+
+Salvar
+
+</button>
+
+<button
+class="limpar"
+onclick="limparCampos()">
+
+Limpar
+
+</button>
+
+<button
+class="fechar"
+onclick="fecharMes()">
+
+Fechar
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBcjj4oVPr2eMml8kX-9lD6M4XE5j7eCKc",
+    authDomain: "balancosetorial.firebaseapp.com",
+    projectId: "balancosetorial",
+    storageBucket: "balancosetorial.firebasestorage.app",
+    messagingSenderId: "982470800589",
+    appId: "1:982470800589:web:c16d386f11522172fa2584",
+    measurementId: "G-4SDSMMJ082"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+let mesAtual = "Janeiro";
+const dados = {};
+
+// ================= FUNÇÕES =================
+
+function chaveAtual() {
+  return document.getElementById("ano").value + "_" +
+         document.getElementById("igreja").value;
+}
+
+async function logar() {
+
+    const email = document.getElementById("usuario").value.trim();
+    const senha = document.getElementById("senha").value;
+
+    try {
+
+        await signInWithEmailAndPassword(auth, email, senha);
+
+        document.getElementById("login").style.display = "none";
+        document.getElementById("sistema").style.display = "block";
+
+        document.getElementById("erro").innerHTML = "";
+
+    } catch (erro) {
+
+        document.getElementById("erro").innerHTML =
+            "E-mail ou senha inválidos.";
+
+    }
+
+}
+
+async function sair(){
+
+    await signOut(auth);
+
+    location.reload();
+
+}
+
+function abrirDashboard() {}
+
+function alternarDark() {
+  document.body.classList.toggle("dark");
+}
+
+async function abrirMes(mes){
+
+    mesAtual = mes;
+
+    document.getElementById("tituloMes").innerHTML =
+    "Financeiro - " + mes;
+
+    document.getElementById("janelaMes").style.display = "flex";
+
+    limparCampos();
+
+    const chave = chaveAtual();
+
+    const ref = doc(db, "financeiro", chave + "_" + mesAtual);
+
+    const snap = await getDoc(ref);
+
+    if (snap.exists()) {
+
+        const d = snap.data();
+
+        document.getElementById("entrada").value = d.entrada || "";
+        document.getElementById("dizimo").value = d.dizimo || "";
+        document.getElementById("oferta").value = d.oferta || "";
+        document.getElementById("transferencia").value = d.transferencia || "";
+        document.getElementById("saida").value = d.saida || "";
+        document.getElementById("depositado").value = d.depositado || "";
+        document.getElementById("missoes").value = d.missoes || "";
+
+    }
+
+    calcularSaldo();
+
+}
+
+function fecharMes() {
+  document.getElementById("janelaMes").style.display = "none";
+}
+
+function limparCampos() {
+  document.querySelectorAll("input").forEach(i => i.value = "");
+}
+
+function numero(id){
+
+    return Number(
+        document.getElementById(id).value
+        .replace(/\./g,"")
+        .replace(",",".")
+    ) || 0;
+
+}
+
+function mascaraMoeda(input){
+
+    let valor = input.value.replace(/\D/g,"");
+
+    valor = (Number(valor)/100).toLocaleString("pt-BR",{
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+    });
+
+    input.value = valor;
+
+}
+
+function calcularSaldo() {
+  let entrada = numero("entrada");
+  let dizimo = numero("dizimo");
+  let oferta = numero("oferta");
+  let transferencia = numero("transferencia");
+  let saida = numero("saida");
+  let depositado = numero("depositado");
+  let missoes = numero("missoes");
+
+  let saldo =
+    entrada +
+    dizimo +
+    oferta +
+    transferencia -
+    saida -
+    depositado -
+    missoes;
+
+  document.getElementById("saldo").value = saldo.toLocaleString("pt-BR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+});
+
+async function salvarMes() {
+
+    try {
+
+        let chave = chaveAtual();
+
+        if (!dados[chave]) {
+            dados[chave] = {};
+        }
+
+        dados[chave][mesAtual] = {
+            entrada: numero("entrada"),
+            dizimo: numero("dizimo"),
+            oferta: numero("oferta"),
+            transferencia: numero("transferencia"),
+            saida: numero("saida"),
+            depositado: numero("depositado"),
+            missoes: numero("missoes"),
+            saldo: numero("saldo")
+        };
+
+        await setDoc(
+            doc(db, "financeiro", chave + "_" + mesAtual),
+            dados[chave][mesAtual]
+        );
+await atualizarDashboard();
+
+        alert("Graça e paz. Salvo com Sucesso!");
+
+    } catch (e) {
+
+        alert("ERRO:\n" + e);
+
+    }
+
+}
+
+function controlarMeses(){
+
+    const anoSelecionado = Number(document.getElementById("ano").value);
+
+    const hoje = new Date();
+
+    const anoAtual = hoje.getFullYear();
+
+    const mesAtual = hoje.getMonth();
+
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach((card,index)=>{
+
+        card.style.opacity="1";
+        card.style.pointerEvents="auto";
+        card.style.filter="none";
+
+        if(anoSelecionado>anoAtual){
+
+            card.style.opacity=".4";
+            card.style.pointerEvents="none";
+            card.style.filter="grayscale(100%)";
+
+        }else if(anoSelecionado===anoAtual && index>mesAtual){
+
+            card.style.opacity=".4";
+            card.style.pointerEvents="none";
+            card.style.filter="grayscale(100%)";
+
+        }
+
+    });
+
+    const anos=document.getElementById("ano").options;
+
+    for(let i=0;i<anos.length;i++){
+
+        anos[i].disabled=Number(anos[i].value)>anoAtual;
+
+    }
+
+}
+
+async function atualizarDashboard(){
+
+    let entradas=0;
+    let saidas=0;
+    let depositados=0;
+    let saldo=0;
+
+    const chave=chaveAtual();
+
+    const meses=[
+    "Janeiro","Fevereiro","Março","Abril","Maio","Junho",
+    "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"
+    ];
+
+    for(const mes of meses){
+
+        const snap=await getDoc(doc(db,"financeiro",chave+"_"+mes));
+
+        if(snap.exists()){
+
+            const d=snap.data();
+
+            entradas+=(d.entrada||0)+(d.dizimo||0)+(d.oferta||0)+(d.transferencia||0);
+
+            saidas+=(d.saida||0);
+
+            depositados+=(d.depositado||0);
+
+            saldo+=(d.saldo||0);
+
+        }
+
+    }
+
+    document.getElementById("totalEntradas").innerHTML=entradas.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+    document.getElementById("totalSaidas").innerHTML=saidas.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+    document.getElementById("totalDepositado").innerHTML=depositados.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+    document.getElementById("saldoGeral").innerHTML=saldo.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+
+}
+
+// ================== EXPOR GLOBAL ==================
+
+window.logar = logar;
+window.sair = sair;
+window.abrirDashboard = abrirDashboard;
+window.alternarDark = alternarDark;
+window.abrirMes = abrirMes;
+window.fecharMes = fecharMes;
+window.limparCampos = limparCampos;
+window.salvarMes = salvarMes;
+window.controlarMeses = controlarMeses;
+
+// ================== EVENTS ==================
+
+window.addEventListener("load", () => {
+controlarMeses();
+atualizarDashboard();
+
+  ["entrada","dizimo","oferta","transferencia","saida","depositado","missoes"]
+    .forEach(id => {
+
+document.getElementById("ano").addEventListener("change", controlarMeses);
+
+document.getElementById("ano").addEventListener("change", atualizarDashboard);
+
+document.getElementById("igreja").addEventListener("change", atualizarDashboard);
+
+      document.getElementById(id).addEventListener("input", function(){
+
+          mascaraMoeda(this);
+          calcularSaldo();
+
+atualizarDashboard();
+
+      });
+
+    });
+
+});
+</script>
+
+</body>
+
+</html>
