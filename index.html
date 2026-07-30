@@ -1,0 +1,1940 @@
+<!DOCTYPE html><html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IPDA Setorial Contagem Centro - Transmissão Ao Vivo</title>
+
+<meta name="description" content="Transmissões ao vivo, pedidos de oração e programação dos cultos da IPDA Setorial Contagem Centro.">
+
+<link rel="icon" type="image/png" href="favicon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(
+    180deg,
+    #f4f7fb,
+    #e8eef7
+);
+    color:#2d2d2d;
+}
+
+header h1{
+    margin:10px 0 5px;
+    font-size:32px;
+}
+
+header p{
+    margin:0;
+    opacity:.95;
+}
+
+header{
+    background:#0d47a1;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+#mensagem{
+    grid-column:1/3;
+    text-align:center;
+}
+
+#modal-trabalhos,
+#modal-departamento{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.7);
+    z-index:9999999;
+}
+
+.redes-sociais{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin:20px 0;
+}
+
+.rede-card{
+    width:52px;
+    height:52px;
+    background:#fff;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 4px 10px rgba(0,0,0,.15);
+    transition:.3s;
+}
+
+.rede-card img{
+    width:28px;
+    height:28px;
+    object-fit:contain;
+}
+
+.rede-card:hover{
+    transform:scale(1.08);
+}
+
+.modal-conteudo{
+    background:white;
+    width:90%;
+    max-width:800px;
+    max-height:85vh;
+    overflow-y:auto;
+    margin:30px auto;
+    padding:20px;
+    border-radius:15px;
+    position:relative;
+}
+
+img{
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    user-select:none;
+    -webkit-user-drag:none;
+    pointer-events:none;
+}
+
+.fechar{
+    position:absolute;
+    top:10px;
+    right:15px;
+    font-size:30px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.item-trabalho{
+    padding:15px;
+    margin:10px 0;
+    background:#f4f7fb;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.item-trabalho:hover{
+    background:#e3ebf8;
+}
+
+.fotos-departamento{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.fotos-departamento img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+    border-radius:12px;
+}
+
+#proximos-eventos{
+    background:white;
+
+border-radius:25px;
+
+padding:30px;
+
+box-shadow:0 8px 30px rgba(0,0,0,.08);
+
+margin-bottom:30px;
+}
+
+.evento-card{
+    margin-bottom:20px;
+    border:1px solid #ddd;
+    border-radius:15px;
+    overflow:hidden;
+}
+
+.evento-card img{
+    width:100%;
+    display:block;
+}
+
+.evento-info{
+    padding:15px;
+    text-align:center;
+}
+
+.evento-nome{
+    font-size:20px;
+    font-weight:bold;
+    color:#0d47a1;
+}
+
+.evento-contador{
+    margin-top:10px;
+    font-size:18px;
+    font-weight:bold;
+    color:#c62828;
+}
+
+#cultos-semanais,
+#oracao,
+#versiculo-dia{
+    transition:.3s;
+}
+
+.cards{
+
+    display:grid;
+
+    gap:30px;
+
+}
+
+#cultos-semanais:hover,
+#oracao:hover,
+#versiculo-dia:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 25px rgba(0,0,0,.15);
+}
+
+.container{
+
+margin:60px auto;
+
+padding:30px;
+
+max-width:1200px;
+
+}
+
+#conheca-igreja{
+
+background:white;
+
+border-radius:25px;
+
+padding:30px;
+
+box-shadow:0 8px 30px rgba(0,0,0,.08);
+
+margin-bottom:30px;
+
+}
+
+#foto-igreja{
+
+width:100%;
+
+border-radius:15px;
+
+margin:20px 0;
+
+}
+
+#texto-igreja{
+
+line-height:1.8;
+
+}
+
+#mapa{
+
+margin:20px 0;
+
+border-radius:15px;
+
+overflow:hidden;
+
+}
+
+#mapa img{
+
+width:100%;
+
+display:block;
+
+border-radius:15px;
+
+cursor:pointer;
+
+box-shadow:0 5px 20px rgba(0,0,0,.15);
+
+transition:.3s;
+
+}
+
+#mapa img:hover{
+
+transform:scale(1.02);
+
+}
+
+footer{
+    margin-top:50px;
+    background:linear-gradient(
+        135deg,
+        #0d47a1,
+        #1565c0
+    );
+    color:white;
+    text-align:center;
+    padding:40px 20px;
+    box-shadow:0 -4px 15px rgba(0,0,0,.15);
+}
+
+footer h3{
+    margin-top:0;
+}
+
+footer p{
+    margin:8px 0;
+}
+
+.cartaz{
+    position:relative;
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 8px 25px rgba(0,0,0,.15);
+    margin-bottom:20px;
+}
+#cultos-semanais{
+    background:white;
+
+border-radius:25px;
+
+padding:30px;
+
+box-shadow:0 8px 30px rgba(0,0,0,.08);
+
+margin-bottom:30px;
+}
+
+#cultos-semanais h2{
+    text-align:center;
+    margin-bottom:15px;
+    color:#0d47a1;
+}
+
+.slider{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+    overflow:hidden;
+    border-radius:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,.15);
+}
+
+.slider img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:opacity .3s ease;
+}
+
+.bolinhas{
+    position:absolute;
+    bottom:15px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:10px;
+    z-index:10;
+}
+
+.dot{
+
+    width:14px;
+
+    height:14px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.75);
+
+    border:2px solid rgba(0,0,0,.35);
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.45);
+
+    transition:.3s;
+
+}
+
+.dot.ativo{
+
+    background:white;
+
+    transform:scale(1.25);
+
+    border:2px solid #1565c0;
+
+    box-shadow:
+        0 0 12px rgba(21,101,192,.7),
+        0 2px 8px rgba(0,0,0,.45);
+
+}
+
+#contador{
+    text-align:right;
+    color:#666;
+    font-size:14px;
+    margin-top:-5px;
+    margin-bottom:10px;
+}
+
+.cartaz img{
+    width:100%;
+    display:block;
+}
+
+.aovivo{
+
+    position:absolute;
+
+    top:15px;
+    right:15px;
+
+    background:#e53935;
+
+    color:white;
+
+    padding:8px 15px;
+
+    border-radius:30px;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.3);
+
+    animation:pulsar 1.5s infinite;
+
+}
+
+section,
+#culto,
+#oracao,
+#versiculo-dia,
+#conheca-igreja,
+#proximos-eventos{
+
+    transition:.35s;
+
+}
+
+section:hover,
+#culto:hover,
+#oracao:hover,
+#versiculo-dia:hover,
+#conheca-igreja:hover,
+#proximos-eventos:hover{
+
+    transform:translateY(-5px);
+
+}
+
+@keyframes pulsar{
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.08);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+button{
+
+    width:auto;
+
+    min-width:250px;
+
+    margin:15px auto;
+
+    display:block;
+
+    padding:16px 35px;
+
+    border:none;
+    background:linear-gradient(
+        135deg,
+        #0d47a1,
+        #1976d2
+    );
+    color:white;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+    border-radius:12px;
+    transition:.3s;
+    box-shadow:0 4px 12px rgba(13,71,161,.25);
+}
+
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(13,71,161,.35);
+}
+
+input,
+textarea{
+    width:100%;
+    padding:14px;
+    box-sizing:border-box;
+    margin-bottom:10px;
+    border:1px solid #d6dce5;
+    border-radius:10px;
+    font-size:16px;
+    transition:.3s;
+}
+
+input:focus,
+textarea:focus{
+    outline:none;
+    border-color:#1565c0;
+    box-shadow:0 0 0 4px rgba(21,101,192,.15);
+}
+
+#mensagem{
+    text-align:center;
+    margin-top:20px;
+}
+
+#versiculo-dia{
+    background:white;
+
+border-radius:25px;
+
+padding:30px;
+
+box-shadow:0 8px 30px rgba(0,0,0,.08);
+
+margin-bottom:30px;
+}
+
+#versiculo-dia h2{
+    color:#0d47a1;
+    margin-bottom:15px;
+}
+
+#texto-versiculo{
+    font-size:18px;
+    font-style:italic;
+    line-height:1.6;
+    color:#333;
+}
+
+#referencia-versiculo{
+    margin-top:15px;
+    font-weight:bold;
+    color:#0d47a1;
+}
+
+
+#oracao{
+
+    background:white;
+
+border-radius:25px;
+
+padding:30px;
+
+box-shadow:0 8px 30px rgba(0,0,0,.08);
+
+margin-bottom:30px;
+}
+
+header{
+    background:linear-gradient(135deg,#0d47a1,#1565c0);
+    color:white;
+    padding:15px;
+    text-align:center;
+    box-shadow:0 3px 15px rgba(0,0,0,.25);
+}
+
+#culto{
+
+    margin-top:40px;
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:20px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+#logo-igreja{
+    width:100%;
+    max-width:700px;
+    height:auto;
+    display:block;
+    margin:auto;
+}
+
+.banner{
+
+    position:relative;
+
+    width:100%;
+
+    height:500px;
+
+    overflow:hidden;
+
+}
+
+.banner-img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    filter:brightness(.45);
+
+}
+
+.banner-texto{
+
+    position:absolute;
+
+    top:50%;
+
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    text-align:center;
+
+    color:white;
+
+    width:90%;
+
+}
+
+.banner-texto h1{
+
+    font-size:52px;
+
+    margin-bottom:20px;
+
+}
+
+.banner-texto p{
+
+    font-size:24px;
+
+    margin-bottom:35px;
+
+}
+
+@media (min-width: 900px){
+
+    .container{
+        max-width:700px;
+    }
+
+    button{
+        width:300px;
+        display:block;
+        margin:15px auto;
+    }
+
+    #cultos-semanais,
+    #oracao,
+    #versiculo-dia,
+    #proximos-eventos{
+        padding:15px;
+    }
+
+    .cartaz img{
+        max-height:500px;
+        object-fit:contain;
+    }
+
+    .evento-card img{
+        max-height:400px;
+        object-fit:contain;
+    }
+
+}
+
+@media (max-width:899px){
+
+    header h1{
+        font-size:24px;
+    }
+
+    .container{
+        width:auto;
+        padding:10px;
+    }
+
+    button{
+        width:100%;
+    }
+
+}
+
+#oracao,
+#versiculo-dia,
+#proximos-eventos,
+#cultos-semanais{
+
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+@media(min-width:900px){
+
+.container{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    align-items:start;
+}
+
+#culto,
+#mensagem,
+#proximos-eventos{
+    grid-column:1/3;
+}
+
+}
+
+#oracao:hover,
+#versiculo-dia:hover,
+#proximos-eventos:hover,
+#cultos-semanais:hover{
+
+    transform:translateY(-5px);
+
+    transition:.3s;
+
+}
+
+</style></head><body>
+
+<header>
+
+    <div class="logo-area">
+        <img
+        src="Logo.png"
+        alt="Logo Igreja"
+        id="logo-igreja">
+    </div>
+
+<div id="menu-btn" onclick="abrirTrabalhos()">
+    ☰ MENU
+</div>
+
+<div id="cultos-semanais">
+
+    <h2> Cultos Semanais</h2>
+
+    <div class="slider">
+
+        <img id="slide"
+        src="01.jpg"
+        alt="Cultos Semanais">
+
+        <div class="bolinhas">
+
+            <span class="dot ativo"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <h1>IPDA Setorial Contagem Centro</h1>
+
+<div class="redes-sociais">
+
+    <a href="https://youtube.com/@IPDASETORIALCONTAGEMCENTRO" target="_blank" class="rede-card">
+        <img src="youtube.png" alt="YouTube">
+    </a>
+
+    <a href="https://www.instagram.com/ipda_contagem_centro?igsh=dWplZmpjbmt2bXQz" target="_blank" class="rede-card">
+        <img src="instagram.png" alt="Instagram">
+    </a>
+
+</div>
+
+<p>
+Acompanhe nossos cultos ao vivo e envie seu pedido de oração.
+</p>
+
+</header>
+
+<section class="banner">
+
+    <img src="fachada.jpg" class="banner-img">
+
+    <div class="banner-texto">
+
+        <h1>IPDA Setorial Contagem Centro</h1>
+
+        <p>Mais que uma igreja. Uma família.</p>
+
+        <button onclick="window.scrollTo({top:600,behavior:'smooth'})">
+            ▶ ASSISTIR AO VIVO
+        </button>
+
+    </div>
+
+</section>
+
+<div class="container"><div class="cards"><div id="culto"></div>
+
+<div id="mensagem">
+    Carregando transmissão...
+
+</div>
+
+</div>
+
+<div id="oracao">
+
+    <h2>🙏 Pedido de Oração</h2>
+
+    <input
+    id="nome"
+    placeholder="Seu nome">
+
+    <textarea
+id="pedido"
+placeholder="Digite seu pedido"
+rows="5"
+maxlength="100"></textarea>
+
+<div id="contador">0/100</div>
+
+    <button onclick="enviarPedido()">
+        Enviar Pedido
+    </button>
+
+</div>
+
+<div id="versiculo-dia">
+
+    <h2>📖 Versículo do Dia</h2>
+
+    <p id="texto-versiculo"></p>
+
+    <div id="referencia-versiculo"></div>
+
+</div>
+
+<div id="conheca-igreja">
+
+<h2>Conheça a Igreja</h2>
+
+<img src="fachada.jpg" id="foto-igreja">
+
+<p id="texto-igreja">
+
+A Igreja Pentecostal Deus é Amor é dedicada à pregação do Evangelho de Jesus Cristo, ao ensino da Palavra de Deus e à oração.
+
+</p>
+
+<button onclick="abrirHistoria()">
+
+Conheça nossa história
+
+</button>
+
+</div>
+
+<div id="proximos-eventos">
+
+    <h2>
+        Próximos Eventos
+    </h2>
+
+    <div id="lista-eventos"></div>
+
+</div>
+
+</div><script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script><script>
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyC5Ylv9RyBfZ3BN5IgDWGqrldQR9yIbFRA",
+
+  authDomain: "ipda-setorial-contagem.firebaseapp.com",
+
+  databaseURL:
+  "https://ipda-setorial-contagem-default-rtdb.firebaseio.com",
+
+  projectId: "ipda-setorial-contagem",
+
+  storageBucket:
+  "ipda-setorial-contagem.appspot.com",
+
+  messagingSenderId:
+  "815344482867",
+
+  appId:
+  "1:815344482867:web:221f5624f89c1e25468146"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.database();
+
+const pedidoInput = document.getElementById("pedido");
+const contador = document.getElementById("contador");
+
+pedidoInput.addEventListener("input", () => {
+    contador.innerText =
+        pedidoInput.value.length + "/100";
+});
+
+db.ref("aovivo/transmissao")
+.on("value",(snapshot)=>{
+
+    let culto = snapshot.val();
+
+    if(!culto){
+
+    document.getElementById("culto").innerHTML = "";
+
+    document.getElementById("mensagem")
+    .innerHTML = "Não há transmissões no momento.";
+
+    return;
+}
+
+    if(!culto.ativo){
+
+    document.getElementById("mensagem").innerHTML = "";
+
+    document.getElementById("culto").innerHTML = `
+
+        <div class="cartaz">
+
+            <img src="${culto.cartaz}">
+
+            <div class="aovivo"
+            style="background:#ff9800;">
+                ⏳ EM BREVE
+            </div>
+
+        </div>
+
+        <h2 style="text-align:center;">
+            ${culto.titulo}
+        </h2>
+
+    `;
+
+    return;
+}
+
+    document.getElementById("mensagem").innerHTML = "";
+
+    document.getElementById("culto")
+    .innerHTML = `
+
+        <div class="cartaz">
+
+            <img src="${culto.cartaz}">
+
+            <div class="aovivo">
+                🔴 AO VIVO
+            </div>
+
+        </div>
+
+        <h2 style="text-align:center;">
+            ${culto.titulo}
+        </h2>
+<button
+onclick="ouvirCulto('${culto.youtube}')">
+
+    ▶ OUVIR AGORA
+
+</button>
+
+<div id="player-live"></div>
+
+`;
+
+});
+
+
+function enviarPedido(){
+
+    const ultimoPedido = localStorage.getItem("pedidoEnviado");
+
+if(ultimoPedido){
+
+    const agora = new Date();
+
+    const liberacao = new Date(ultimoPedido);
+
+    liberacao.setDate(
+        liberacao.getDate() + 1
+    );
+
+    liberacao.setHours(
+        15,
+        0,
+        0,
+        0
+    );
+
+
+    if(agora < liberacao){
+
+        const hora =
+        liberacao.toLocaleTimeString(
+            "pt-BR",
+            {
+                hour:"2-digit",
+                minute:"2-digit"
+            }
+        );
+
+
+        const data =
+        liberacao.toLocaleDateString(
+            "pt-BR"
+        );
+
+
+        alert(
+        "Você já enviou um pedido.\n\n" +
+        "Será possível enviar outro dia " +
+        data +
+        " às " +
+        hora
+        );
+
+        return;
+
+    }
+
+}
+
+    const nome =
+    document.getElementById("nome").value.trim();
+
+    const pedido =
+    document.getElementById("pedido").value.trim();
+
+    if(nome === "" || pedido === ""){
+        alert("Preencha todos os campos.");
+        return;
+    }
+
+    if(pedido.length > 100){
+        alert("O pedido deve ter no máximo 100 caracteres.");
+        return;
+    }
+
+    db.ref("pedidosOracao")
+    .push({
+        nome:nome,
+        pedido:pedido,
+        data:new Date().toISOString()
+    })
+
+    .then(()=>{
+
+        localStorage.setItem(
+    "pedidoEnviado",
+    new Date()
+);
+
+        alert(
+"Apaz do Senhor Jesus!\n\n" +
+"Seu pedido de oração foi enviado com sucesso."
+);
+
+        document.getElementById("nome").value = "";
+        document.getElementById("pedido").value = "";
+
+    })
+
+    .catch((erro)=>{
+
+        console.error("Erro Firebase:", erro);
+
+        alert(
+            "Erro ao enviar pedido:\n\n" +
+            erro.message
+        );
+
+    });
+
+}
+
+function ouvirCulto(link){
+
+    let videoId = "";
+
+    if(link.includes("watch?v=")){
+        videoId = link.split("watch?v=")[1].split("&")[0];
+    }
+    else if(link.includes("youtu.be/")){
+        videoId = link.split("youtu.be/")[1].split("?")[0];
+    }
+    else if(link.includes("/live/")){
+        videoId = link.split("/live/")[1].split("?")[0];
+    }
+
+    if(!videoId){
+        alert("Link do YouTube inválido.");
+        return;
+    }
+
+    document.getElementById("player-live").innerHTML = `
+        <div style="
+            margin-top:20px;
+            position:relative;
+            padding-bottom:56.25%;
+            height:0;
+            overflow:hidden;
+            border-radius:15px;
+            box-shadow:0 2px 10px rgba(0,0,0,.2);
+        ">
+            <iframe
+                src="https://www.youtube.com/embed/${videoId}?autoplay=1"
+                frameborder="0"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                style="
+                    position:absolute;
+                    top:0;
+                    left:0;
+                    width:100%;
+                    height:100%;
+                ">
+            </iframe>
+        </div>
+    `;
+}
+
+const imagens = [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg",
+    "07.jpg"
+];
+
+imagens.forEach(src => {
+    const img = new Image();
+    img.src = src;
+});
+let slideAtual = 0;
+
+let inicioToque = 0;
+
+const slider = document.querySelector(".slider");
+
+slider.addEventListener("touchstart",(e)=>{
+
+    inicioToque = e.touches[0].clientX;
+
+});
+
+slider.addEventListener("touchend",(e)=>{
+
+    const fimToque = e.changedTouches[0].clientX;
+
+    if(inicioToque - fimToque > 50){
+
+        trocarSlide();
+
+    }
+
+    if(fimToque - inicioToque > 50){
+
+        slideAtual =
+        (slideAtual - 2 + imagens.length) % imagens.length;
+
+        trocarSlide();
+
+    }
+
+});
+
+function trocarSlide(){
+
+    const slide =
+    document.getElementById("slide");
+
+    slide.style.opacity = "0";
+
+    setTimeout(() => {
+
+        slideAtual =
+        (slideAtual + 1) % imagens.length;
+
+        slide.src =
+        imagens[slideAtual];
+
+        document
+        .querySelectorAll(".dot")
+        .forEach(dot =>
+            dot.classList.remove("ativo")
+        );
+
+        document
+        .querySelectorAll(".dot")
+        [slideAtual]
+        .classList.add("ativo");
+
+        slide.onload = () => {
+            slide.style.opacity = "1";
+        };
+
+    }, 300);
+}
+
+setInterval(trocarSlide, 5000);
+
+const versiculos = [
+
+{
+texto:"Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito.",
+ref:"João 3:16"
+},
+
+{
+texto:"O Senhor é o meu pastor; nada me faltará.",
+ref:"Salmos 23:1"
+},
+
+{
+texto:"Tudo posso naquele que me fortalece.",
+ref:"Filipenses 4:13"
+},
+
+{
+texto:"Buscai ao Senhor enquanto se pode achar.",
+ref:"Isaías 55:6"
+},
+
+{
+texto:"Perto está o Senhor de todos os que o invocam.",
+ref:"Salmos 145:18"
+},
+
+{
+texto:"A alegria do Senhor é a vossa força.",
+ref:"Neemias 8:10"
+},
+
+{
+texto:"Entrega o teu caminho ao Senhor; confia nele.",
+ref:"Salmos 37:5"
+},
+
+{
+texto:"Bem-aventurados os limpos de coração.",
+ref:"Mateus 5:8"
+},
+
+{
+texto:"Não temas, porque eu sou contigo.",
+ref:"Isaías 41:10"
+},
+
+{
+texto:"Clama a mim, e responder-te-ei.",
+ref:"Jeremias 33:3"
+},
+
+{
+texto:"O choro pode durar uma noite, mas a alegria vem pela manhã.",
+ref:"Salmos 30:5"
+},
+
+{
+texto:"Lâmpada para os meus pés é tua palavra.",
+ref:"Salmos 119:105"
+},
+
+{
+texto:"Se Deus é por nós, quem será contra nós?",
+ref:"Romanos 8:31"
+},
+
+{
+texto:"O meu socorro vem do Senhor.",
+ref:"Salmos 121:2"
+},
+
+{
+texto:"Sede fortes e corajosos.",
+ref:"Josué 1:9"
+}
+
+];
+
+let intervaloEventos = null;
+
+function iniciarContadores(eventos){
+
+    if(intervaloEventos){
+        clearInterval(intervaloEventos);
+    }
+
+    intervaloEventos = setInterval(()=>{
+
+        eventos.forEach((evento,index)=>{
+
+            let alvo =
+            new Date(
+                evento.data +
+                "T" +
+                evento.hora
+            );
+
+            let diff =
+            alvo - new Date();
+
+            if(diff <= 0){
+
+                atualizarEventos(eventos);
+
+                return;
+
+            }
+
+            let dias =
+            Math.floor(diff / 86400000);
+
+            let horas =
+            Math.floor(
+                (diff % 86400000)
+                / 3600000
+            );
+
+            let minutos =
+            Math.floor(
+                (diff % 3600000)
+                / 60000
+            );
+
+            let segundos =
+            Math.floor(
+                (diff % 60000)
+                / 1000
+            );
+
+            let texto = "Inicia em ";
+
+            if(dias > 0){
+
+                texto +=
+                    dias + "d " +
+                    horas + "h " +
+                    minutos + "m " +
+                    segundos + "s";
+
+            }else if(horas > 0){
+
+                texto +=
+                    horas + "h " +
+                    minutos + "m " +
+                    segundos + "s";
+
+            }else if(minutos > 0){
+
+                texto +=
+                    minutos + "m " +
+                    segundos + "s";
+
+            }else{
+
+                texto +=
+                    segundos + "s";
+
+            }
+
+            const contador =
+            document.getElementById(
+                "contador-" + index
+            );
+
+            if(contador){
+                contador.innerHTML = texto;
+            }
+
+        });
+
+    },1000);
+
+}
+
+function renderizarEventos(eventos){
+
+    let html = "";
+
+    eventos.forEach((evento,index)=>{
+
+        html += `
+
+        <div class="evento-card">
+
+            <img src="${evento.imagem}">
+
+            <div class="evento-info">
+
+                <div class="evento-nome">
+                    ${evento.nome}
+                </div>
+
+                <div
+                    class="evento-contador"
+                    id="contador-${index}">
+                </div>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+    document.getElementById(
+        "lista-eventos"
+    ).innerHTML = html;
+
+    iniciarContadores(eventos);
+
+}
+
+    function atualizarEventos(eventos){
+
+    let agora = new Date();
+
+    eventos = eventos.filter(evento=>{
+
+        let dataEvento =
+        new Date(
+            evento.data +
+            "T" +
+            evento.hora
+        );
+
+        return dataEvento > agora;
+
+    });
+
+    eventos.sort((a,b)=>{
+
+        let da =
+        new Date(a.data + "T" + a.hora);
+
+        let dbb =
+        new Date(b.data + "T" + b.hora);
+
+        return da - dbb;
+
+    });
+
+    eventos = eventos.slice(0,3);
+
+    renderizarEventos(eventos);
+
+}
+
+function carregarVersiculoDoDia(){
+
+    const hoje = new Date();
+
+    const inicioAno =
+        new Date(hoje.getFullYear(),0,1);
+
+    const diaDoAno =
+        Math.floor(
+            (hoje - inicioAno) /
+            86400000
+        );
+
+    const indice =
+        diaDoAno % versiculos.length;
+
+    document.getElementById(
+        "texto-versiculo"
+    ).innerText =
+        '"' +
+        versiculos[indice].texto +
+        '"';
+
+    document.getElementById(
+        "referencia-versiculo"
+    ).innerText =
+        versiculos[indice].ref;
+}
+
+carregarVersiculoDoDia();
+
+db.ref("eventos").on("value",(snapshot)=>{
+
+    let eventos = [];
+
+    snapshot.forEach(child=>{
+
+        eventos.push(child.val());
+
+    });
+
+    atualizarEventos(eventos);
+
+});
+
+function abrirTrabalhos(){
+
+    document.getElementById(
+        "modal-trabalhos"
+    ).style.display = "block";
+
+}
+
+function fecharTrabalhos(){
+
+    document.getElementById(
+        "modal-trabalhos"
+    ).style.display = "none";
+
+}
+
+function fecharDepartamento(){
+
+    document.getElementById(
+        "modal-departamento"
+    ).style.display = "none";
+
+}
+
+function abrirDepartamento(nome){
+
+    const dados = {
+
+        galileu:{
+            titulo:"Pequeno Galileu",
+            fotos:[
+                "pequenogalileu1.jpg",
+                "pequenogalileu2.jpg"
+            ]
+        },
+
+        mulheres:{
+            titulo:"Mulheres de Fé",
+            fotos:[
+                "mulheresdefe1.jpg",
+                "mulheresdefe2.jpg"
+            ]
+        },
+
+        expansao:{
+            titulo:"Expansão",
+            fotos:[
+                "expansao1.jpg",
+                "expansao2.jpg"
+            ]
+        },
+
+        pemu:{
+            titulo:"Projeto PEMU",
+            fotos:[
+                "pemu1.jpg",
+                "pemu2.jpg"
+            ]
+        },
+
+transmissao:{
+    titulo:"Dias de Transmissão",
+    fotos:[]
+
+},
+
+horarios:{
+    titulo:"Horários dos Cultos",
+    fotos:[]
+},
+
+pix:{
+    titulo:"Deseja Ofertar / Dizimar?",
+    fotos:[]
+}
+
+    };
+
+    let dep = dados[nome];
+
+if(nome === "transmissao"){
+
+    document.getElementById(
+        "titulo-departamento"
+    ).innerHTML = "Dias de Transmissão";
+
+    document.getElementById(
+        "fotos-departamento"
+    ).innerHTML = `
+        <div style="padding:20px;font-size:20px;line-height:2;">
+            📅 Terça-feira: 19H00<br>
+            📅 Sexta-feira: 19H00<br>
+            📅 Domingo: 19H00
+        </div>
+    `;
+
+    document.getElementById(
+        "modal-departamento"
+    ).style.display = "block";
+
+    return;
+}
+
+if(nome === "horarios"){
+
+    document.getElementById(
+        "titulo-departamento"
+    ).innerHTML = "Horários dos Cultos";
+
+    document.getElementById(
+        "fotos-departamento"
+    ).innerHTML = `
+        <div style="padding:20px;font-size:20px;line-height:2;">
+            📅 <strong>Domingo:</strong> 08H00 e 19H00<br>
+            📅 <strong>Segunda-feira:</strong> 08H00, 15H00 e 19H00<br>
+            📅 <strong>Terça-feira:</strong> 08H00, 15H00 e 19H00<br>
+            📅 <strong>Quarta-feira:</strong> 08H00, 15H00 e 19H00<br>
+            📅 <strong>Quinta-feira:</strong> 19H00<br>
+            📅 <strong>Sexta-feira:</strong> 08H00, 15H00 e 19H00<br>
+            📅 <strong>Sábado:</strong> 19H00
+        </div>
+    `;
+
+    document.getElementById(
+        "modal-departamento"
+    ).style.display = "block";
+
+    return;
+}
+
+if(nome === "pix"){
+
+    document.getElementById(
+        "titulo-departamento"
+    ).innerHTML = "Deseja Ofertar / Dizimar?";
+
+    document.getElementById(
+        "fotos-departamento"
+    ).innerHTML = `
+
+        <div style="width:100%;text-align:center;padding:20px;">
+
+            <div style="
+    width:100%;
+    max-width:320px;
+    margin:0 auto 20px;
+    padding:12px;
+    border:2px solid #1565c0;
+    border-radius:15px;
+    background:#fff;
+">
+
+    <img
+    src="Logo.png"
+    style="
+        width:100%;
+        height:auto;
+        display:block;
+    ">
+
+</div>
+
+            <div style="
+                width:260px;
+                height:260px;
+                margin:0 auto 20px;
+                border:3px dashed #1565c0;
+                border-radius:15px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                overflow:hidden;
+                background:#fff;
+            ">
+
+                <img src="qr.png"
+                style="max-width:100%;max-height:100%;">
+
+            </div>
+
+            <div style="
+                font-size:20px;
+                font-weight:bold;
+                margin-bottom:20px;
+            ">
+                CNPJ: 43.208.040/0001-36
+            </div>
+
+            <div style="
+                font-size:24px;
+                font-weight:bold;
+                color:#0d47a1;
+                margin-bottom:10px;
+            ">
+                Enviar o comprovante para:
+            </div>
+
+            <a
+            href="https://wa.me/5531986775326"
+            target="_blank"
+            style="
+                font-size:24px;
+                font-weight:bold;
+                color:#25D366;
+                text-decoration:none;
+            ">
+                (31) 9 8677-5326
+            </a>
+
+        </div>
+
+    `;
+
+    document.getElementById(
+        "modal-departamento"
+    ).style.display = "block";
+
+    return;
+}
+
+    document.getElementById(
+        "titulo-departamento"
+    ).innerHTML = dep.titulo;
+
+    document.getElementById(
+        "fotos-departamento"
+    ).innerHTML = `
+
+        <img src="${dep.fotos[0]}">
+
+        <img src="${dep.fotos[1]}">
+
+    `;
+
+    document.getElementById(
+        "modal-departamento"
+    ).style.display = "block";
+
+}
+
+function abrirHistoria(){
+
+document.getElementById("modal-historia").style.display="block";
+
+setTimeout(()=>{
+
+window.scrollTo({
+
+top:document.body.scrollHeight,
+
+behavior:"smooth"
+
+});
+
+},100);
+
+}
+
+function fecharHistoria(){
+
+document.getElementById("modal-historia").style.display="none";
+
+}
+
+function abrirMapa(){
+
+window.open(
+"https://www.google.com/maps/place/Av.+Jo%C3%A3o+de+Deus+Costa,+300a+-+Centro,+Contagem+-+MG,+32040-652/",
+"_blank"
+);
+
+}
+
+</script>
+<footer>
+
+<img src="Logo.png" style="max-width:280px">
+
+<h2>IPDA Setorial Contagem Centro</h2>
+
+<p>
+Av. João de Deus Costa, 300A
+</p>
+
+<p>
+Centro - Contagem/MG
+</p>
+
+<p>
+(31) 98677-5326
+</p>
+
+<button onclick="abrirMapa()">
+Abrir no Google Maps
+</button>
+
+<p style="margin-top:40px">
+
+IPDA Setorial Contagem Centro
+
+</p>
+
+</footer>
+
+<div id="modal-trabalhos">
+
+    <div class="modal-conteudo">
+
+        <span class="fechar"
+        onclick="fecharTrabalhos()">
+            ×
+        </span>
+
+        <h2>Nossos Trabalhos</h2>
+
+        <div
+        class="item-trabalho"
+        onclick="abrirDepartamento('galileu')">
+            Pequeno Galileu
+        </div>
+
+        <div
+        class="item-trabalho"
+        onclick="abrirDepartamento('mulheres')">
+            Mulheres de Fé
+        </div>
+
+        <div
+        class="item-trabalho"
+        onclick="abrirDepartamento('expansao')">
+            Expansão
+        </div>
+
+        <div
+        class="item-trabalho"
+        onclick="abrirDepartamento('pemu')">
+            Projeto PEMU
+        </div>
+
+<div
+class="item-trabalho"
+onclick="abrirDepartamento('transmissao')">
+    Dias de Transmissão
+</div>
+
+<div
+class="item-trabalho"
+onclick="abrirDepartamento('horarios')">
+    Horários dos Cultos
+</div>
+
+<div
+class="item-trabalho"
+onclick="abrirDepartamento('pix')">
+    Deseja Ofertar / Dizimar?
+</div>
+
+    </div>
+
+</div>
+
+<div id="modal-departamento">
+
+    <div class="modal-conteudo">
+
+        <span class="fechar"
+        onclick="fecharDepartamento()">
+            ×
+        </span>
+
+        <h2 id="titulo-departamento"></h2>
+
+        <div
+        id="fotos-departamento"
+        class="fotos-departamento">
+        </div>
+
+    </div>
+
+</div>
+
+<div id="modal-historia" class="modal">
+
+<div class="modal-conteudo">
+
+<span class="fechar" onclick="fecharHistoria()">
+
+×
+
+</span>
+
+<h2>Nossa História</h2>
+
+<p>
+
+A Igreja Pentecostal Deus é Amor (IPDA) foi fundada em 3 de junho de 1962 pelo Missionário David Miranda, na cidade de São Paulo. Desde sua fundação, a igreja tem como objetivo anunciar o Evangelho de Jesus Cristo, incentivar a oração, o estudo da Bíblia e a vida cristã, alcançando pessoas por meio da pregação e da evangelização.
+
+Ao longo dos anos, a IPDA expandiu suas atividades para diversas cidades do Brasil e também para outros países, estabelecendo congregações dedicadas à evangelização, ao ensino da Palavra de Deus e ao atendimento espiritual de seus fiéis.
+
+A IPDA Setorial Contagem Centro faz parte dessa missão, buscando servir à comunidade com cultos, oração, evangelização e ações voltadas ao fortalecimento da fé cristã. Nosso compromisso é receber todas as pessoas com amor, respeito e dedicação, anunciando a mensagem de salvação por meio de Jesus Cristo.
+
+Seja bem-vindo(a)! É uma alegria receber sua visita. Esperamos que este site seja um canal de bênçãos e informações sobre nossa igreja e nossas atividades.
+
+</p>
+
+</div>
+
+</div>
+
+</body>
+</html>
