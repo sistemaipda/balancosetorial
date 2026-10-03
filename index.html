@@ -1,0 +1,2597 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#155a86">
+<meta name="color-scheme" content="light dark">
+<title>IPDA Setorial Contagem Centro</title>
+<meta name="description" content="Transmissões ao vivo, pedidos de oração e programação dos cultos da IPDA Setorial Contagem Centro.">
+<link rel="icon" type="image/png" href="favicon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+ --brand:#0b4264;
+ --brand-2:#176c96;
+ --brand-3:#2d89b5;
+ --gold:#c9a45c;
+ --ink:#17232d;
+ --muted:#687783;
+ --line:#e4eaee;
+ --bg:#f6f8fa;
+ --paper:#fff;
+ --paper-2:#f1f5f7;
+ --dark:#081821;
+ --dark-2:#0e2634;
+ --radius:18px;
+ --radius-sm:12px;
+ --content:1240px;
+ --font-scale:1;
+ --font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+ --shadow:0 12px 40px rgba(9,39,56,.075);
+ --shadow-hover:0 22px 55px rgba(9,39,56,.13);
+}
+html{font-size:calc(16px * var(--font-scale));scroll-behavior:smooth;scroll-padding-top:112px}
+html[data-theme=dark]{
+ --ink:#edf4f7;--muted:#aab9c2;--line:#293d49;--bg:#08151d;--paper:#0d202b;--paper-2:#122934;
+ --shadow:0 15px 45px rgba(0,0,0,.25);--shadow-hover:0 25px 65px rgba(0,0,0,.34)
+}
+*{box-sizing:border-box}
+body{margin:0;padding-top:88px;overflow-x:hidden;background:var(--bg);color:var(--ink);font-family:var(--font-family);line-height:1.65;-webkit-font-smoothing:antialiased}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+img{max-width:100%}
+::selection{background:#c9a45c55}
+:focus-visible{outline:3px solid #2d89b577;outline-offset:3px}
+
+.skip-link{position:fixed;left:10px;top:-50px;z-index:100000;padding:8px 12px;border-radius:7px;background:var(--brand);color:#fff;text-decoration:none;font-size:12px;font-weight:800}.skip-link:focus{top:10px}\n\n/* HEADER */
+#top-header{
+ position:absolute;top:0;left:0;right:0;z-index:50000;
+ background:rgba(255,255,255,.94);border-bottom:1px solid var(--line);
+ backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)
+}
+html[data-theme=dark] #top-header{background:rgba(13,32,43,.94)}
+.topbar{height:52px;width:min(var(--content),calc(100% - 40px));margin:auto;position:relative;display:flex;align-items:center;justify-content:center}
+.top-logo{height:35px;width:min(370px,56vw);display:flex;align-items:center;justify-content:center}
+.top-logo img{width:100%;height:100%;object-fit:contain}
+#top-header #menu-btn,#top-header #search-btn{
+ position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;padding:0;margin:0;
+ border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--brand);
+ display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.05)
+}
+#top-header #menu-btn{left:0;flex-direction:column;gap:4px}
+#top-header #search-btn{right:0;font-size:16px}
+#top-header #menu-btn span{width:18px;height:2px;background:currentColor;border-radius:4px}
+#top-header #menu-btn:hover,#top-header #search-btn:hover{background:var(--brand);color:white}
+.main-nav{
+ height:36px;border-top:1px solid var(--line);display:flex;justify-content:center;gap:2px;overflow:auto;white-space:nowrap;scrollbar-width:none
+}
+.main-nav::-webkit-scrollbar{display:none}
+.main-nav a{
+ height:30px;margin:3px 0;padding:0 13px;display:flex;align-items:center;border-radius:7px;
+ color:var(--muted);text-decoration:none;font-size:11px;font-weight:800;letter-spacing:.045em;text-transform:uppercase
+}
+.main-nav a:hover{background:var(--paper-2);color:var(--brand)}
+
+/* DRAWER */
+#drawer{position:fixed;z-index:60000;left:-350px;top:0;width:min(320px,88vw);height:100dvh;padding-top:72px;background:var(--paper);border-right:1px solid var(--line);box-shadow:25px 0 60px #0002;overflow:auto;transition:left .3s ease}
+#drawer.aberto{left:0}
+#drawer-fundo{display:none;position:fixed;z-index:59999;inset:0;background:#06141dcc;backdrop-filter:blur(4px)}
+#drawer-fundo.aberto{display:block}
+.drawer-item{margin:3px 12px;padding:13px 15px;border-radius:10px;color:var(--ink);font-size:14px;font-weight:700}
+.drawer-item:hover{background:var(--paper-2);color:var(--brand)}
+
+/* HERO */
+.banner{
+ position:relative;height:min(590px,62vh);min-height:420px;overflow:hidden;background:var(--dark);
+ border-radius:0;isolation:isolate
+}
+.banner-img{
+ position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;
+ z-index:-2!important;filter:brightness(.48) saturate(.9)!important;transform:scale(1.015)
+}
+.banner:after{
+ content:"";position:absolute;inset:0;z-index:-1;
+ background:linear-gradient(90deg,#061a28ee 0%,#061a28a8 45%,#061a2815 78%),linear-gradient(0deg,#061a2860,transparent 45%)
+}
+.banner-texto{
+ width:min(var(--content),calc(100% - 40px));height:100%;margin:auto;padding:60px 0;
+ display:flex;justify-content:center;flex-direction:column;align-items:flex-start;color:white
+}
+.banner-texto:before{
+ content:"IPDA • SETORIAL CONTAGEM CENTRO";margin-bottom:18px;padding:7px 11px;
+ border-left:3px solid var(--gold);color:#fff;opacity:.9;font-size:10px;font-weight:850;letter-spacing:.16em
+}
+.banner-texto h1{
+ max-width:760px;margin:0;color:#fff;font-family:Montserrat,Inter,sans-serif;font-size:clamp(39px,5.3vw,70px);
+ line-height:1.02;letter-spacing:-.055em;font-weight:800
+}
+.banner-texto p{max-width:600px;margin:22px 0 28px;color:#e8eff2;font-size:clamp(16px,1.6vw,20px);line-height:1.65}
+.banner-texto button{
+ padding:13px 21px;border:0;border-radius:9px;background:#fff;color:var(--brand);font-weight:800;
+ box-shadow:0 10px 30px #0004
+}
+
+/* SOCIAL */
+.portal-redes{width:min(var(--content),calc(100% - 40px));margin:0 auto}
+.redes-sociais{height:68px;display:flex;align-items:center;justify-content:flex-end;gap:8px}
+.rede-card{width:38px;height:38px;border:1px solid var(--line);border-radius:9px;background:var(--paper);display:flex;align-items:center;justify-content:center;box-shadow:none}
+.rede-card:hover{border-color:var(--brand-3);transform:translateY(-2px)}
+.rede-card img{width:20px;height:20px;object-fit:contain}
+
+/* LAYOUT */
+.container{width:min(var(--content),calc(100% - 40px));margin:0 auto 75px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.container>.cards{display:contents}
+#culto,#mensagem,#proximos-eventos,#versiculo-dia,#conheca-igreja,#cultos-semanais{grid-column:1/-1}
+#oracao,#cultos-semanais,#culto,#conheca-igreja,#versiculo-dia,#mensagem{
+ background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:var(--radius)
+}
+#oracao,#cultos-semanais,#culto,#conheca-igreja{padding:31px}
+#oracao h2,#cultos-semanais h2,#culto h2,#conheca-igreja h2,#versiculo-dia h2,#mensagem h2{
+ margin:0 0 18px;font-family:Montserrat,Inter,sans-serif;font-size:24px;line-height:1.2;letter-spacing:-.035em;font-weight:800;color:var(--ink)
+}
+#oracao h2:before{content:"✦";display:inline-block;margin-right:8px;color:var(--gold);font-size:12px;vertical-align:3px}\n#oracao h2:after,#cultos-semanais h2:after,#culto h2:after,#conheca-igreja h2:after{
+ content:"";display:block;width:35px;height:3px;margin-top:10px;border-radius:9px;background:var(--gold)
+}
+#oracao p,#conheca-igreja p,#mensagem p{color:var(--muted)}
+
+/* WEEKLY */
+#cultos-semanais{padding-bottom:25px}
+#cultos-semanais h2{color:var(--brand)}
+.slider{position:relative;aspect-ratio:16/7;overflow:hidden;border-radius:12px;background:var(--paper-2)}
+.slider img{width:100%;height:100%;display:block;object-fit:cover}
+.bolinhas{position:absolute;bottom:13px;left:50%;transform:translateX(-50%);display:flex;gap:6px;padding:6px 9px;border-radius:30px;background:#061a2877;backdrop-filter:blur(8px)}
+.dot{width:7px;height:7px;border:0;padding:0;border-radius:50%;background:#ffffff88}
+.dot.ativo{background:#fff;transform:scale(1.25)}
+
+/* LIVE */
+.cartaz{position:relative;overflow:hidden;background:var(--paper-2);border:1px solid var(--line);border-radius:14px}
+.cartaz img{width:100%;display:block;max-height:620px;object-fit:contain}
+.aovivo{position:absolute;top:14px;right:14px;padding:6px 10px;border-radius:6px;background:#c92121;color:#fff;font-size:10px;font-weight:900;letter-spacing:.1em}
+#culto>h2{text-align:center;margin-top:20px}
+#culto>button,#oracao>button{
+ display:block;margin:17px auto 0;padding:12px 21px;border:0;border-radius:9px;background:var(--brand);color:#fff;font-weight:800;box-shadow:0 8px 20px #0b426433
+}
+#culto>button:hover,#oracao>button:hover{background:var(--brand-2);transform:translateY(-1px)}
+
+/* PRAYER */
+#oracao input,#oracao textarea,#campo-pesquisa{
+ width:100%;margin-bottom:10px;padding:12px 13px;border:1px solid var(--line);border-radius:9px;background:var(--paper-2);color:var(--ink)
+}
+#oracao textarea{min-height:130px;resize:vertical}
+#oracao input:focus,#oracao textarea:focus,#campo-pesquisa:focus{outline:none;border-color:var(--brand-3);box-shadow:0 0 0 3px #2d89b522}
+#contador{margin:-3px 0 9px;text-align:right;font-size:11px;color:var(--muted)}
+#barra-progresso{height:5px;overflow:hidden;border-radius:9px;background:var(--paper-2);margin-bottom:15px}
+#barra{height:100%;width:0;background:var(--brand-2);transition:width .2s}
+
+/* VERSE */
+#versiculo-dia{
+ position:relative;overflow:hidden;padding:62px 35px;text-align:center;
+ background:linear-gradient(135deg,var(--dark),var(--dark-2));border:0;color:white
+}
+#versiculo-dia:before{content:"“";position:absolute;left:4%;top:-30px;font-family:Georgia,serif;font-size:180px;color:#ffffff0c}
+#versiculo-dia h2{position:relative;color:#fff}
+#versiculo-dia h2:before{content:"VERSÍCULO DO DIA";display:block;margin-bottom:13px;color:var(--gold);font-family:Inter,sans-serif;font-size:10px;letter-spacing:.18em;font-weight:900}
+#texto-versiculo{position:relative;max-width:850px;margin:0 auto;color:#f0f5f7;font-family:Georgia,serif;font-size:clamp(19px,2vw,27px);line-height:1.7;font-style:italic}
+#referencia-versiculo{position:relative;margin:16px 0 0;color:#d8bd80;font-weight:800}
+
+/* CHURCH */
+#conheca-igreja{display:grid;grid-template-columns:.85fr 1.15fr;gap:38px;align-items:center}
+#foto-igreja{width:100%;height:360px;object-fit:cover;border-radius:12px}
+#texto-igreja{font-size:15px;line-height:1.85;color:var(--muted)}
+#conheca-igreja button{padding:10px 15px;border:1px solid var(--line);border-radius:8px;background:var(--paper-2);color:var(--brand);font-weight:800}
+
+/* EVENTS */
+#proximos-eventos{
+ width:100vw;margin-left:calc(50% - 50vw);padding:58px max(20px,calc((100vw - var(--content))/2));
+ border-radius:0;border-left:0;border-right:0;box-shadow:none;background:var(--paper-2)
+}
+#proximos-eventos h2{width:min(var(--content),100%);margin:0 auto 10px;font-family:Montserrat,Inter,sans-serif;font-size:30px;letter-spacing:-.04em}
+.eventos-arraste{width:min(var(--content),100%);margin:0 auto 12px;text-align:right;color:var(--muted);font-size:11px;font-weight:700}
+.eventos-arraste:before{content:"PROGRAMAÇÃO";margin-right:9px;color:var(--gold);font-size:9px;letter-spacing:.14em}
+#lista-eventos{touch-action:pan-x;overscroll-behavior-x:contain;
+ display:flex!important;flex-wrap:nowrap!important;gap:18px;width:100%;overflow-x:auto!important;padding:4px max(3px,calc((100vw - var(--content))/2)) 17px;-ms-overflow-style:none;
+ scroll-snap-type:x mandatory;scrollbar-width:none;scrollbar-color:transparent transparent
+}
+#lista-eventos::-webkit-scrollbar{display:none}\n#lista-eventos .evento-card{
+ flex:0 0 355px;margin:0;overflow:hidden;scroll-snap-align:start;border:1px solid var(--line);border-radius:13px;background:var(--paper);box-shadow:0 5px 20px #0b2a3b0a
+}
+#lista-eventos .evento-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-3px)}
+#lista-eventos .evento-card img{width:100%;aspect-ratio:16/9;display:block;object-fit:cover}
+.evento-info{padding:15px 17px 17px}
+.evento-nome{font-size:17px;font-weight:850;color:var(--ink)}
+.evento-contador{margin-top:7px;font-size:12px;color:var(--brand);font-weight:750}
+
+/* MODALS */
+#modal-trabalhos,#modal-departamento,#modal-historia,#modal-pesquisa{
+ position:fixed;inset:0;z-index:70000;background:#06141db8;backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)
+}
+#modal-trabalhos,#modal-departamento,#modal-historia{display:none;overflow:auto;padding:25px 0}
+.modal-conteudo{
+ position:relative;width:min(720px,calc(100% - 30px));max-height:calc(100dvh - 50px);overflow:auto;margin:auto;padding:32px;
+ background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:16px;box-shadow:0 30px 80px #0004
+}
+.modal-conteudo h2{margin:0 0 18px;color:var(--brand);font-family:Montserrat,Inter,sans-serif;font-size:26px}
+.modal-conteudo p{color:var(--muted);line-height:1.8}
+.fechar{position:absolute;right:12px;top:12px;width:35px;height:35px;display:flex!important;align-items:center;justify-content:center;border:0;border-radius:50%;background:var(--paper-2);color:var(--ink);font-size:22px}
+.item-trabalho{margin:8px 0;padding:13px 14px;border:1px solid var(--line);border-radius:9px;background:var(--paper-2);font-weight:750}
+.item-trabalho:hover{color:var(--brand);border-color:#2d89b555}
+.fotos-departamento{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fotos-departamento img{width:100%;height:230px;object-fit:cover;border-radius:10px}
+
+/* SEARCH */
+#modal-pesquisa{display:none;align-items:flex-start;justify-content:center;padding:86px 15px 25px}
+#modal-pesquisa.aberto{display:flex}
+.pesquisa-caixa{position:relative;width:min(620px,100%);padding:22px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 30px 80px #0004}
+.pesquisa-caixa h3{margin:0 0 14px;color:var(--brand);font-family:Montserrat,Inter,sans-serif}
+.pesquisa-fechar{position:absolute;right:10px;top:10px;width:34px!important;min-width:0!important;height:34px;margin:0!important;padding:0!important;border:0!important;border-radius:50%!important;background:var(--paper-2)!important;color:var(--ink)!important;box-shadow:none!important}
+.pesquisa-caixa>button:not(.pesquisa-fechar){width:100%;padding:11px;border:0;border-radius:8px;background:var(--brand);color:#fff;font-weight:800}
+
+/* COOKIE */
+#cookie-banner{position:fixed;z-index:80000;bottom:15px;left:50%;transform:translateX(-50%);width:min(680px,calc(100% - 30px));padding:17px 19px;border:1px solid var(--line);border-radius:13px;background:var(--paper);color:var(--ink);box-shadow:0 20px 60px #0002}
+#cookie-banner p{margin:0 0 11px;text-align:center;color:var(--muted);font-size:13px}
+#cookie-ok{display:block;margin:auto;padding:9px 18px;border:0;border-radius:8px;background:var(--brand);color:#fff;font-weight:800}
+
+/* FOOTER */
+footer{
+ position:relative;padding:64px 20px 38px;background:var(--dark);color:#fff;text-align:center;display:flex;flex-direction:column;align-items:center
+}
+footer:before{content:"";position:absolute;top:0;width:45px;height:3px;background:var(--gold)}
+footer img{width:min(205px,70vw);margin-bottom:10px}
+footer h2{margin:7px 0 10px;font-family:Montserrat,Inter,sans-serif;font-size:21px}
+footer p{margin:3px 0;color:#bdcbd1;font-size:13px}
+.footer-email{margin-top:11px!important}
+.footer-identidade{width:100%;margin:25px 0 15px;display:flex;flex-direction:column;gap:3px}
+.footer-identidade strong{font-size:14px}.footer-identidade span{font-size:12px;color:#92a7b2}
+footer>button{margin:3px auto;padding:10px 15px;border:1px solid #ffffff33;border-radius:8px;background:#fff;color:var(--brand);font-weight:800}
+
+/* APPEARANCE */
+.appearance-trigger{
+ position:fixed;right:18px;bottom:18px;z-index:75000;width:44px;height:44px;border:1px solid var(--line);border-radius:50%;
+ background:var(--paper);color:var(--brand);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center
+}
+.appearance-trigger:hover{background:var(--brand);color:#fff}
+.appearance-backdrop{display:none;position:fixed;inset:0;z-index:74999;background:#0003}
+.appearance-backdrop.open{display:block}
+.appearance-panel{
+ position:fixed;right:18px;bottom:73px;z-index:75001;width:min(350px,calc(100vw - 24px));max-height:calc(100dvh - 90px);overflow:auto;
+ padding:19px;border:1px solid var(--line);border-radius:16px;background:var(--paper);color:var(--ink);box-shadow:0 25px 70px #0003;
+ opacity:0;transform:translateY(8px);pointer-events:none;transition:.2s
+}
+.appearance-panel.open{opacity:1;transform:none;pointer-events:auto}
+.appearance-head{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.appearance-kicker{display:block;color:var(--gold);font-size:9px;letter-spacing:.15em;font-weight:900}
+.appearance-head h2{margin:2px 0 0;font-family:Montserrat,Inter,sans-serif;font-size:20px}
+.appearance-close{width:32px;height:32px;border:0;border-radius:50%;background:var(--paper-2);color:var(--ink);font-size:20px}
+.appearance-section{padding:15px 0;border-bottom:1px solid var(--line)}
+.appearance-label{display:block;margin-bottom:8px;font-size:12px;font-weight:850}
+.appearance-label+small{display:block;color:var(--muted);font-size:10px}
+.segmented-control{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;padding:3px;background:var(--paper-2);border-radius:9px}
+.segmented-control button{padding:8px 3px;border:0;border-radius:7px;background:transparent;color:var(--muted);font-size:10px;font-weight:800}
+.segmented-control button.active{background:var(--paper);color:var(--brand);box-shadow:0 2px 8px #0001}
+.font-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.font-grid button{padding:9px;border:1px solid var(--line);border-radius:8px;background:var(--paper-2);color:var(--ink);font-size:12px}
+.font-grid button.active{border-color:var(--brand-3);color:var(--brand);background:#2d89b512}
+.appearance-row,.appearance-toggle-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.setting-value{color:var(--brand);font-size:11px;font-weight:900}
+.range-wrap{display:flex;align-items:center;gap:7px}.range-step{flex:0 0 34px;height:31px;border:1px solid var(--line);border-radius:7px;background:var(--paper-2);color:var(--ink);font-weight:800}
+.range-wrap input[type=range]{flex:1;accent-color:var(--brand)}
+.switch{position:relative;flex:0 0 42px;width:42px;height:23px}.switch input{opacity:0;width:1px;height:1px}
+.switch-slider{position:absolute;inset:0;border:1px solid var(--line);border-radius:99px;background:var(--paper-2);cursor:pointer}
+.switch-slider:after{content:"";position:absolute;top:2px;left:2px;width:17px;height:17px;border-radius:50%;background:#91a0a8;transition:.2s}
+.switch input:checked+.switch-slider{background:var(--brand);border-color:var(--brand)}.switch input:checked+.switch-slider:after{left:21px;background:white}
+.appearance-reset{width:100%;margin-top:13px;padding:9px;border:1px solid var(--line);border-radius:8px;background:var(--paper-2);color:var(--muted);font-size:11px;font-weight:800}
+
+/* ALTO CONTRASTE */
+body.high-contrast{
+  --ink:#000!important;
+  --muted:#111!important;
+  --line:#000!important;
+  --bg:#fff!important;
+  --paper:#fff!important;
+  --paper-2:#f2f2f2!important;
+  --brand:#003f5c!important;
+  --brand-2:#002f45!important;
+  --brand-3:#005a80!important;
+  --gold:#8a6500!important;
+}
+body.high-contrast #top-header,
+body.high-contrast .appearance-panel,
+body.high-contrast #drawer,
+body.high-contrast .modal-conteudo,
+body.high-contrast #cookie-banner{
+  border-color:#000!important;
+}
+body.high-contrast button,
+body.high-contrast input,
+body.high-contrast textarea,
+body.high-contrast select,
+body.high-contrast a{
+  text-shadow:none!important;
+}
+body.high-contrast .banner:after{
+  background:linear-gradient(90deg,#000f 0%,#000b 45%,#0003 78%),linear-gradient(0deg,#0009,transparent 45%)!important;
+}
+body.high-contrast .banner-texto p{color:#fff!important}
+body.high-contrast .main-nav a:hover,
+body.high-contrast .drawer-link:hover{
+  outline:2px solid currentColor;
+  outline-offset:-2px;
+}
+
+/* TEXTOS EM PSEUDO-ELEMENTOS */
+#oracao h2::before{font-size:calc(12px * var(--font-scale,1))!important}
+.banner-texto::before{font-size:calc(10px * var(--font-scale,1))!important}
+#versiculo-dia::before{font-size:calc(180px * var(--font-scale,1))!important}
+#versiculo-dia h2::before{font-size:calc(10px * var(--font-scale,1))!important}
+.eventos-arraste::before{font-size:calc(9px * var(--font-scale,1))!important}
+
+/* MOTION / ACCESSIBILITY */
+.animar{opacity:0;transform:translateY(15px)}.animar.mostrar{animation:sectionIn .55s ease forwards}
+@keyframes sectionIn{to{opacity:1;transform:none}}
+body.reduced-motion *,body.reduced-motion *:before,body.reduced-motion *:after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0s!important;scroll-behavior:auto!important}
+
+
+.ui-icon{width:18px;height:18px;display:inline-block;flex:0 0 auto;fill:none;stroke:currentColor}
+.ui-icon-lg{width:20px;height:20px}
+#top-header .ui-icon{stroke-width:1.7}
+.slider{touch-action:pan-y}
+.slider img{transition:opacity .16s ease,transform .25s ease}
+.slider img.trocando{opacity:.35;transform:scale(1.012)}
+.slide-arrow{
+ position:absolute;z-index:4;top:50%;transform:translateY(-50%);width:44px;height:44px;
+ border:1px solid #ffffff44;border-radius:50%;background:#061a2899;color:#fff;
+ display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);
+ box-shadow:0 8px 22px #0004;transition:.2s
+}
+.slide-arrow:hover{background:#fff;color:var(--brand);border-color:#fff;transform:translateY(-50%) scale(1.04)}
+.slide-prev{left:14px}.slide-next{right:14px}
+.bolinhas{gap:5px}
+.dot{width:8px;height:8px;cursor:pointer}
+.section-kicker{display:block;margin-bottom:7px;color:var(--gold);font-size:9px;font-weight:900;letter-spacing:.18em}
+#conheca-igreja{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.igreja-imagem-wrap{position:relative;min-width:0}
+#foto-igreja{height:390px;box-shadow:0 18px 40px #09273818}
+.igreja-selo{
+ position:absolute;left:15px;bottom:15px;padding:7px 10px;border-radius:6px;background:#061a28dc;color:#fff;
+ font-size:9px;font-weight:900;letter-spacing:.12em
+}
+.igreja-conteudo{padding:5px 0}
+.igreja-conteudo h2{margin-bottom:13px!important}
+.igreja-conteudo button{margin-top:10px!important}
+.igreja-conteudo button span{margin-left:9px;font-size:16px}
+#appearance-trigger{
+ position:fixed!important;right:15px!important;bottom:calc(15px + env(safe-area-inset-bottom))!important;
+ top:auto!important;transform:none!important;z-index:90000!important;
+}
+.appearance-panel{z-index:90001!important}
+.appearance-backdrop{z-index:89999!important}
+@media(max-width:850px){
+ body{padding-top:88px;overflow-x:hidden}
+ .topbar{height:52px}
+ .top-logo{height:33px}
+ .main-nav{height:36px}
+ .banner{height:55vh;min-height:400px}
+ #conheca-igreja{display:grid;grid-template-columns:1fr;gap:20px}
+ #foto-igreja{height:260px}
+ .igreja-conteudo{padding:0 2px}
+ .slide-arrow{width:40px;height:40px}
+ .slide-prev{left:9px}.slide-next{right:9px}
+ #appearance-trigger{right:12px!important}
+}
+@media(max-width:430px){
+ .top-logo{width:min(245px,62vw)}
+ #top-header #menu-btn,#top-header #search-btn{width:34px;height:34px}
+ .banner-texto h1{font-size:35px}
+ .banner-texto p{font-size:14px}
+ .slider{aspect-ratio:16/9}
+ .slide-arrow{width:38px;height:38px}
+}
+
+/* RESPONSIVE */
+@media(max-width:850px){
+ body{padding-top:108px}
+ .topbar{width:100%;padding:0 52px}
+ .top-logo{width:min(270px,57vw)}
+ .main-nav{justify-content:flex-start;padding:0 7px}
+ .main-nav a{padding:0 10px;font-size:9px}
+ .banner{height:57vh;min-height:420px}
+ .banner-texto{width:calc(100% - 36px);padding:40px 0;justify-content:flex-end}
+ .banner-texto h1{font-size:clamp(34px,9vw,48px)}
+ .banner-texto p{font-size:15px;margin:16px 0 22px}
+ .banner-texto button{width:100%;max-width:260px}
+ .portal-redes{width:calc(100% - 36px)}
+ .redes-sociais{height:58px;justify-content:center}
+ .container{width:calc(100% - 24px);display:block;margin-bottom:50px}
+ .container>*{margin-bottom:16px!important}
+ #oracao,#cultos-semanais,#culto,#conheca-igreja{padding:23px}
+ #conheca-igreja{display:flex;gap:22px}
+ #foto-igreja{height:270px}
+ #versiculo-dia{padding:48px 22px}
+ #texto-versiculo{font-size:19px}
+ #proximos-eventos{padding:45px 0 22px}
+ #proximos-eventos h2{padding:0 18px;font-size:25px}
+ .eventos-arraste{margin-left:18px;text-align:left}
+ #lista-eventos{touch-action:pan-x;overscroll-behavior-x:contain;gap:13px;padding-left:18px;padding-right:18px}
+ #lista-eventos .evento-card{flex-basis:82vw;max-width:355px}
+ .fotos-departamento{grid-template-columns:1fr}
+ .fotos-departamento img{height:220px}
+ .modal-conteudo{width:calc(100% - 22px);padding:24px}
+ .appearance-panel{right:10px;bottom:67px;width:calc(100vw - 20px)}
+}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+@media(prefers-color-scheme:dark){
+ html[data-theme=system]{--ink:#edf4f7;--muted:#aab9c2;--line:#293d49;--bg:#08151d;--paper:#0d202b;--paper-2:#122934}
+}
+</style>
+
+<style id="ajustes-v4">
+/* ===== AJUSTES FINAIS V4: COMPACTO, ENCAIXADO E RESPONSIVO ===== */
+html{scroll-padding-top:78px;overflow-x:hidden}
+body{padding-top:78px;overflow-x:hidden}
+#top-header{top:0!important;height:78px!important;overflow:hidden}
+#top-header .topbar{height:44px!important;width:min(1120px,calc(100% - 28px));padding:0 48px}
+#top-header .top-logo{height:30px!important;width:min(250px,52vw)}
+#top-header #menu-btn,#top-header #search-btn{width:34px!important;height:34px!important}
+#top-header .main-nav{height:34px!important}
+#top-header .main-nav a{height:30px!important;margin:2px 0!important;padding:0 11px!important;font-size:9px!important}
+
+/* Hero mais baixo e sem excesso de área azul */
+.banner{height:430px!important;min-height:0!important}
+.banner-texto{width:min(1120px,calc(100% - 36px));padding:38px 0!important;justify-content:center!important}
+.banner-texto h1{max-width:680px!important;font-size:clamp(36px,4.8vw,62px)!important}
+.banner-texto p{margin:15px 0 22px!important;font-size:17px!important}
+
+/* Conteúdo desktop mais compacto */
+.container{width:min(1120px,calc(100% - 32px));gap:18px;margin-bottom:48px}
+#oracao,#cultos-semanais,#culto,#conheca-igreja{padding:24px!important}
+#oracao h2,#cultos-semanais h2,#culto h2,#conheca-igreja h2,#mensagem h2{font-size:22px!important}
+#cultos-semanais .slider{aspect-ratio:16/6.7}
+#culto .cartaz img{max-height:500px}
+
+/* Conheça a Igreja: dois blocos equilibrados no desktop */
+#conheca-igreja{display:grid!important;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)!important;gap:28px!important;align-items:center!important}
+.igreja-imagem-wrap{min-width:0!important}
+#foto-igreja{width:100%!important;height:300px!important;display:block!important;object-fit:cover!important;border-radius:12px!important}
+.igreja-conteudo{min-width:0!important;padding:0!important}
+.igreja-conteudo p{margin:0 0 14px!important;font-size:15px!important;line-height:1.72!important}
+.igreja-conteudo button{width:auto!important;max-width:100%!important;margin-top:4px!important}
+
+/* Eventos menos altos */
+#proximos-eventos{padding-top:42px!important;padding-bottom:30px!important}
+#lista-eventos .evento-card{flex-basis:320px!important}
+
+/* Mobile: encaixar sem sobras e sem layout quebrado */
+@media(max-width:850px){
+ body{padding-top:78px!important}
+ #top-header{height:78px!important}
+ #top-header .topbar{height:44px!important;width:100%;padding:0 48px}
+ #top-header .top-logo{height:29px!important;width:min(235px,56vw)!important}
+ #top-header .main-nav{height:34px!important}
+ #top-header .main-nav a{font-size:9px!important;padding:0 10px!important}
+ .banner{height:430px!important;min-height:0!important}
+ .banner-texto{width:calc(100% - 34px)!important;padding:30px 0 34px!important;justify-content:center!important}
+ .banner-texto:before{margin-bottom:14px!important;font-size:9px!important}
+ .banner-texto h1{font-size:clamp(33px,9vw,46px)!important;line-height:1.02!important}
+ .banner-texto p{font-size:15px!important;margin:14px 0 20px!important}
+ .banner-texto button{width:auto!important;min-width:235px!important;padding:12px 18px!important}
+ .portal-redes{width:calc(100% - 28px)!important}
+ .redes-sociais{height:48px!important}
+ .container{width:calc(100% - 20px)!important;margin-bottom:32px!important}
+ .container>*{margin-bottom:12px!important}
+ #oracao,#cultos-semanais,#culto,#conheca-igreja{padding:20px!important}
+ #cultos-semanais .slider{aspect-ratio:16/9!important}
+ #culto .cartaz img{max-height:430px}
+ #conheca-igreja{display:grid!important;grid-template-columns:1fr!important;gap:17px!important;align-items:start!important}
+ .igreja-imagem-wrap{width:100%!important}
+ #foto-igreja{height:190px!important;width:100%!important;object-fit:cover!important}
+ .igreja-selo{left:12px!important;bottom:12px!important;font-size:8px!important}
+ .igreja-conteudo{width:100%!important;padding:0!important}
+ .igreja-conteudo .section-kicker{text-align:left!important}
+ .igreja-conteudo h2{font-size:25px!important;margin-bottom:12px!important}
+ .igreja-conteudo p{font-size:15px!important;line-height:1.68!important;margin-bottom:15px!important}
+ .igreja-conteudo button{display:block!important;width:100%!important;padding:11px 14px!important}
+ #versiculo-dia{padding:40px 20px!important}
+ #proximos-eventos{padding:34px 0 24px!important}
+ #proximos-eventos h2{padding:0 18px!important;font-size:25px!important}
+ .eventos-arraste{margin-left:18px!important}
+ #lista-eventos{padding-left:18px!important;padding-right:18px!important}
+ #lista-eventos .evento-card{flex-basis:78vw!important;max-width:320px!important}
+}
+@media(max-width:430px){
+ #top-header .top-logo{width:min(210px,52vw)!important}
+ .banner{height:410px!important}
+ .banner-texto h1{font-size:34px!important}
+ .banner-texto p{font-size:14px!important}
+ #oracao,#cultos-semanais,#culto,#conheca-igreja{padding:18px!important}
+ #foto-igreja{height:175px!important}
+}
+
+/* AJUSTE FINAL DO CABEÇALHO */
+#top-header .topbar{height:58px}
+#top-header #menu-btn,#top-header #search-btn{width:46px;height:46px}
+#top-header #menu-btn span{width:23px;height:3px}
+#top-header #search-btn{font-size:21px}
+.top-logo{height:38px}
+@media(max-width:850px){
+  body{padding-top:94px}
+  #top-header .topbar{height:56px}
+  #top-header .main-nav{height:38px}
+  #top-header .main-nav a{height:32px;margin:3px 0}
+  #top-header #menu-btn,#top-header #search-btn{width:44px;height:44px}
+  #top-header #menu-btn span{width:22px;height:3px}
+  #top-header #search-btn{font-size:20px}
+  .top-logo{height:35px}
+}
+
+/* AJUSTE FINAL — CABEÇALHO MAIS ENCAIXADO + ORAÇÃO/VERSÍCULO EM DUAS COLUNAS */
+html,body{overflow-x:hidden}
+body{padding-top:70px!important}
+#top-header{height:70px!important;min-height:70px!important}
+#top-header .topbar{height:40px!important}
+#top-header .top-logo{height:28px!important}
+#top-header .main-nav{height:30px!important}
+#top-header .main-nav a{height:27px!important;margin:1px 0!important}
+
+/* Desktop: pedido de oração e versículo lado a lado */
+@media(min-width:851px){
+  #oracao,#versiculo-dia{
+    grid-column:auto!important;
+    width:100%;
+    min-width:0;
+    height:100%;
+  }
+  #versiculo-dia{padding:31px!important}
+  #oracao{padding:31px!important}
+}
+
+/* Mobile: empilha novamente, sem apertar o conteúdo */
+@media(max-width:850px){
+  body{padding-top:70px!important}
+  #top-header{height:70px!important}
+  #top-header .topbar{height:40px!important;padding:0 46px!important}
+  #top-header .top-logo{height:27px!important;width:min(225px,54vw)!important}
+  #top-header .main-nav{height:30px!important}
+  #top-header .main-nav a{height:27px!important;margin:1px 0!important;padding:0 9px!important;font-size:9px!important}
+  #oracao,#versiculo-dia{grid-column:1/-1!important;width:100%!important}
+}
+
+/* Mantém os botões do cabeçalho grandes mesmo com a faixa reduzida */
+#top-header #menu-btn,#top-header #search-btn{
+  width:38px!important;height:38px!important;
+}
+#top-header #menu-btn span{width:23px!important;height:3px!important}
+#top-header .ui-icon{width:22px!important;height:22px!important}
+@media(max-width:430px){
+  #top-header #menu-btn,#top-header #search-btn{width:37px!important;height:37px!important}
+  #top-header .ui-icon{width:22px!important;height:22px!important}
+}
+
+
+/* V7 — cabeçalho ainda mais compacto + versículo centralizado no desktop */
+html{scroll-padding-top:58px!important}
+body{padding-top:58px!important}
+#top-header{height:58px!important;min-height:58px!important;overflow:visible!important}
+#top-header .topbar{height:34px!important;padding:0 44px!important}
+#top-header .top-logo{height:24px!important;width:min(220px,50vw)!important}
+#top-header .main-nav{height:24px!important}
+#top-header .main-nav a{height:23px!important;margin:0!important;padding:0 10px!important;font-size:8.5px!important}
+#top-header #menu-btn,#top-header #search-btn{width:36px!important;height:36px!important}
+#top-header #menu-btn span{width:22px!important;height:3px!important}
+#top-header .ui-icon{width:22px!important;height:22px!important}
+@media(min-width:851px){
+  #versiculo-dia{display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;text-align:center!important;padding:28px 34px!important}
+  #versiculo-dia h2,#texto-versiculo,#referencia-versiculo{width:100%;text-align:center}
+  #versiculo-dia h2{margin-top:0!important;margin-bottom:16px!important}
+  #texto-versiculo{margin:0 auto!important;max-width:700px!important}
+  #referencia-versiculo{margin:14px 0 0!important}
+}
+@media(max-width:850px){
+  body{padding-top:58px!important}
+  #top-header{height:58px!important}
+  #top-header .topbar{height:34px!important;padding:0 44px!important}
+  #top-header .top-logo{height:24px!important;width:min(205px,50vw)!important}
+  #top-header .main-nav{height:24px!important}
+  #top-header .main-nav a{height:23px!important;margin:0!important;padding:0 8px!important;font-size:8px!important}
+  #top-header #menu-btn,#top-header #search-btn{width:36px!important;height:36px!important}
+  #top-header #menu-btn span{width:21px!important;height:3px!important}
+  #top-header .ui-icon{width:21px!important;height:21px!important}
+}
+@media(max-width:430px){
+  #top-header .topbar{padding:0 43px!important}
+  #top-header .top-logo{width:min(190px,48vw)!important}
+  #top-header .main-nav a{padding:0 7px!important;font-size:7.7px!important}
+}
+
+</style>
+
+<style id="ajustes-v8">
+/* Cabeçalho: faixa realmente compacta, sem área vazia acima da navegação */
+html{scroll-padding-top:54px!important}
+body{padding-top:54px!important}
+#top-header{
+  height:54px!important;
+  min-height:54px!important;
+  padding:0!important;
+  overflow:visible!important;
+}
+#top-header .topbar{
+  height:31px!important;
+  min-height:31px!important;
+  padding:0 43px!important;
+  margin:0 auto!important;
+  line-height:1!important;
+}
+#top-header .top-logo{
+  height:21px!important;
+  width:min(205px,48vw)!important;
+  line-height:1!important;
+}
+#top-header .top-logo img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important}
+#top-header #menu-btn,#top-header #search-btn{
+  width:35px!important;height:35px!important;min-width:35px!important;
+  top:50%!important;transform:translateY(-50%)!important;
+}
+#top-header #menu-btn span{width:21px!important;height:3px!important}
+#top-header .ui-icon{width:22px!important;height:22px!important}
+#top-header .main-nav{
+  height:23px!important;
+  min-height:23px!important;
+  margin:0!important;
+  border-top:1px solid var(--line)!important;
+}
+#top-header .main-nav a{
+  height:23px!important;
+  min-height:23px!important;
+  margin:0!important;
+  padding:0 9px!important;
+  font-size:9px!important;
+  line-height:1!important;
+}
+
+/* Menu lateral: visual institucional, hierarquia e ícones próprios */
+#drawer{
+  width:min(350px,91vw)!important;
+  padding:0 12px 24px!important;
+  background:var(--paper)!important;
+  border-right:1px solid var(--line)!important;
+  box-shadow:25px 0 70px rgba(0,0,0,.20)!important;
+}
+.drawer-head{
+  min-height:82px;padding:18px 8px 14px;display:grid;grid-template-columns:42px 1fr 34px;
+  align-items:center;gap:11px;border-bottom:1px solid var(--line);
+}
+.drawer-brand-mark{
+  width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(145deg,var(--brand),var(--brand-2));color:#fff;
+  font-family:Montserrat,Inter,sans-serif;font-size:12px;font-weight:900;letter-spacing:.04em;
+  box-shadow:0 7px 18px rgba(11,66,100,.2);
+}
+.drawer-kicker{display:block;margin-bottom:2px;color:var(--gold);font-size:8px!important;letter-spacing:.16em;font-weight:900}
+.drawer-head strong{display:block;font-family:Montserrat,Inter,sans-serif;font-size:15px!important;color:var(--ink)}
+.drawer-close{
+  width:32px;height:32px;border:1px solid var(--line);border-radius:9px;background:var(--paper-2);
+  color:var(--ink);font-size:21px;line-height:1;
+}
+.drawer-close:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
+.drawer-section-title{
+  padding:18px 8px 7px;color:var(--muted);font-size:9px!important;letter-spacing:.15em;font-weight:900;
+}
+.drawer-link{
+  min-height:58px;margin:4px 0;padding:8px 9px!important;display:grid!important;
+  grid-template-columns:38px 1fr 16px;align-items:center;gap:10px;
+  border:1px solid transparent;border-radius:12px;text-decoration:none!important;
+  background:transparent;color:var(--ink)!important;cursor:pointer;
+}
+.drawer-link:hover{
+  background:var(--paper-2);border-color:var(--line);transform:translateX(2px);
+}
+.drawer-icon{
+  width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+  background:rgba(45,137,181,.09);color:var(--brand);border:1px solid rgba(45,137,181,.12);
+}
+.drawer-icon .ui-icon{width:20px;height:20px}
+.drawer-link strong{display:block;font-size:13px!important;font-weight:850;line-height:1.25}
+.drawer-link small{display:block;margin-top:2px;color:var(--muted);font-size:9px!important;line-height:1.25}
+.drawer-chevron{color:var(--muted);font-size:22px;line-height:1;text-align:center}
+
+/* Escala de fonte: todos os elementos de texto passam a respeitar o controle */
+.font-scaled{
+  /* A escala real é aplicada pelo JS abaixo, preservando os tamanhos responsivos originais. */
+}
+
+/* Remove qualquer possibilidade de sobra horizontal no mobile */
+html,body{max-width:100%;overflow-x:hidden!important}
+@media(max-width:850px){
+  html{scroll-padding-top:54px!important}
+  body{padding-top:54px!important}
+  #top-header{height:54px!important}
+  #top-header .topbar{height:31px!important;padding:0 43px!important}
+  #top-header .top-logo{height:21px!important;width:min(195px,48vw)!important}
+  #top-header .main-nav{height:23px!important}
+  #top-header .main-nav a{height:23px!important;font-size:9px!important;padding:0 8px!important}
+  #top-header #menu-btn,#top-header #search-btn{width:35px!important;height:35px!important}
+}
+@media(max-width:430px){
+  #top-header .topbar{padding:0 42px!important}
+  #top-header .top-logo{width:min(180px,46vw)!important}
+  #top-header .main-nav a{padding:0 7px!important;font-size:8.5px!important}
+}
+</style>
+
+
+<style id="correcao-cabecalho-v9">
+/* V9: reduzir SOMENTE o espaço vertical entre o topo da página e a logo.
+   A barra de navegação abaixo permanece no tamanho padrão anterior. */
+html, body {
+  scroll-padding-top: 96px !important;
+}
+
+#top-header {
+  height: 96px !important;
+  min-height: 96px !important;
+  padding: 0 !important;
+}
+
+#top-header .topbar {
+  height: 67px !important;
+  min-height: 67px !important;
+  padding: 0 43px !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#top-header .top-logo {
+  height: 31px !important;
+  width: min(235px, 52vw) !important;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+#top-header .top-logo img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+
+#top-header #menu-btn,
+#top-header #search-btn {
+  width: 42px !important;
+  height: 42px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+#top-header #menu-btn span {
+  width: 25px !important;
+  height: 3px !important;
+}
+
+#top-header #search-btn .ui-icon {
+  width: 25px !important;
+  height: 25px !important;
+}
+
+/* NÃO reduzir a barra de navegação. Ela volta ao tamanho normal da V7. */
+#top-header .main-nav {
+  height: 45px !important;
+  min-height: 45px !important;
+  margin: 0 !important;
+  border-top: 1px solid var(--line) !important;
+}
+
+#top-header .main-nav a {
+  height: 45px !important;
+  min-height: 45px !important;
+  padding: 0 14px !important;
+  font-size: 12px !important;
+  line-height: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+@media (max-width: 850px) {
+  html, body {
+    scroll-padding-top: 96px !important;
+  }
+
+  #top-header {
+    height: 96px !important;
+    min-height: 96px !important;
+  }
+
+  /* A parte superior fica compacta; a navegação continua normal. */
+  #top-header .topbar {
+    height: 51px !important;
+    min-height: 51px !important;
+    padding: 0 43px !important;
+  }
+
+  #top-header .top-logo {
+    height: 26px !important;
+    width: min(205px, 50vw) !important;
+  }
+
+  #top-header #menu-btn,
+  #top-header #search-btn {
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  #top-header .main-nav {
+    height: 45px !important;
+    min-height: 45px !important;
+  }
+
+  #top-header .main-nav a {
+    height: 45px !important;
+    min-height: 45px !important;
+    padding: 0 10px !important;
+    font-size: 11px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  #top-header .topbar {
+    padding: 0 42px !important;
+  }
+
+  #top-header .top-logo {
+    width: min(190px, 48vw) !important;
+  }
+
+  #top-header .main-nav a {
+    padding: 0 8px !important;
+    font-size: 10px !important;
+  }
+}
+</style>
+
+
+<style id="cabecalho-final-logo-grande">
+/* Cabeçalho final: mesmo enquadramento da referência, sem fundo azul na logo. */
+#top-header{
+  background:#fff!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+html[data-theme=dark] #top-header{background:#fff!important}
+
+@media(max-width:850px){
+  body{padding-top:96px!important}
+  html{scroll-padding-top:96px!important}
+  #top-header{height:96px!important;min-height:96px!important;overflow:visible!important}
+  #top-header .topbar{
+    height:51px!important;
+    min-height:51px!important;
+    width:100%!important;
+    padding:0 43px!important;
+  }
+  #top-header .top-logo{
+    height:38px!important;
+    width:min(310px,72vw)!important;
+  }
+  #top-header .top-logo img{
+    width:100%!important;
+    height:100%!important;
+    object-fit:contain!important;
+  }
+  #top-header #menu-btn,#top-header #search-btn{
+    width:42px!important;
+    height:42px!important;
+    border:1px solid #dce3e7!important;
+    background:#fff!important;
+    color:var(--brand)!important;
+    box-shadow:0 4px 14px rgba(0,0,0,.05)!important;
+  }
+  #top-header #menu-btn span{width:25px!important;height:3px!important}
+  #top-header #search-btn .ui-icon{width:27px!important;height:27px!important}
+  #top-header .main-nav{
+    height:45px!important;
+    min-height:45px!important;
+    background:#fff!important;
+    border-top:1px solid #e1e6e9!important;
+    justify-content:flex-start!important;
+    overflow-x:auto!important;
+  }
+  #top-header .main-nav a{
+    height:45px!important;
+    min-height:45px!important;
+    padding:0 10px!important;
+    font-size:11px!important;
+    color:#18232b!important;
+  }
+}
+@media(max-width:430px){
+  #top-header .topbar{padding:0 42px!important}
+  #top-header .top-logo{height:37px!important;width:min(300px,76vw)!important}
+  #top-header .main-nav a{padding:0 9px!important;font-size:10.5px!important}
+}
+</style>
+
+
+<style id="cabecalho-topo-corrigido">
+/* Cabeçalho no topo, mas NÃO fixo durante a rolagem. */
+#top-header{
+  position:absolute!important;
+  top:0!important;
+  left:0!important;
+  right:0!important;
+  margin:0!important;
+  transform:none!important;
+  z-index:50000!important;
+}
+@media(max-width:850px){
+  body{padding-top:96px!important;}
+  #top-header{height:96px!important;min-height:96px!important;}
+}
+</style>
+</head>
+<body>
+<svg aria-hidden="true" width="0" height="0" style="position:absolute;overflow:hidden">
+  <defs>
+    <symbol id="ico-home" viewBox="0 0 24 24"><path d="M3.5 10.5 12 3.7l8.5 6.8v9.2a1.3 1.3 0 0 1-1.3 1.3h-4.5v-6.2H9.3V21H4.8a1.3 1.3 0 0 1-1.3-1.3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+<symbol id="ico-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M7 3.5v4M17 3.5v4M3.5 9.5h17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+<symbol id="ico-event" viewBox="0 0 24 24"><path d="M5 4h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M7 9h10M7 13h3M13 13h4M7 17h3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+<symbol id="ico-prayer" viewBox="0 0 24 24"><path d="M8 20v-5.5c0-2.2 1.5-3.7 3.4-3.7 1.1 0 2 .5 2.7 1.3V7.2a1.7 1.7 0 0 1 3.4 0v5.2l.9-1.3a1.6 1.6 0 0 1 2.7 1.7l-2.7 4.1A5 5 0 0 1 14.2 20z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5.2 9.2c-.5-.9-.3-2.1.6-2.7 1-.7 2.2-.4 2.8.5l1 1.6M5 13.5c-1.5-.4-2.5-1.7-2.2-3.2.2-1.2 1.4-2 2.6-1.7l1.1.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+<symbol id="ico-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.7" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="ico-live" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m10 9 5 3-5 3z" fill="currentColor"/></symbol>
+<symbol id="ico-child" viewBox="0 0 24 24"><circle cx="12" cy="7" r="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M6.5 20c.4-4 2.1-6 5.5-6s5.1 2 5.5 6M8.5 12.5h7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+<symbol id="ico-heart" viewBox="0 0 24 24"><path d="M12 20.2S4.2 15.5 4.2 9.6a4.1 4.1 0 0 1 7.8-1.9 4.1 4.1 0 0 1 7.8 1.9c0 5.9-7.8 10.6-7.8 10.6Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+<symbol id="ico-expand" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 5h5M5 5v5M19 19h-5M19 19v-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+<symbol id="ico-users" viewBox="0 0 24 24"><circle cx="9" cy="9" r="3" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="17" cy="10" r="2.3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3.8 20c.5-3.8 2.2-5.7 5.2-5.7s4.7 1.9 5.2 5.7M14.3 15c2.8-.5 5 .9 5.9 4.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+<symbol id="ico-give" viewBox="0 0 24 24"><path d="M4 7.5h16v11H4zM7 7.5V5.7h10v1.8M8 12h8M10 15h4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+<symbol id="ico-search" viewBox="0 0 24 24">
+      <circle cx="10.8" cy="10.8" r="6.7" fill="none" stroke="currentColor" stroke-width="1.9"/>
+      <path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+      <path d="M8.2 10.8h5.2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".45"/>
+    </symbol>
+    <symbol id="ico-settings" viewBox="0 0 24 24">
+      <path d="M9.4 3.6h5.2l.7 2.1 2 1.2 2.1-.4 2.6 4.5-1.5 1.5v2.4l1.5 1.5-2.6 4.5-2.1-.4-2 1.2-.7 2.1H9.4l-.7-2.1-2-1.2-2.1.4L2 16.4l1.5-1.5v-2.4L2 11l2.6-4.5 2.1.4 2-1.2.7-2.1Z" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linejoin="round"/>
+      <circle cx="12" cy="12" r="3.1" fill="none" stroke="currentColor" stroke-width="1.55"/>
+    </symbol>
+    <symbol id="ico-sun" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.7"/>
+      <path d="M12 2.5v2.2M12 19.3v2.2M21.5 12h-2.2M4.7 12H2.5M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6M18.7 18.7l-1.6-1.6M6.9 6.9L5.3 5.3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="ico-moon" viewBox="0 0 24 24">
+      <path d="M19.5 15.4A8 8 0 0 1 8.6 4.5 8.2 8.2 0 1 0 19.5 15.4Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+      <path d="M17.8 4.2v2.5M19.05 5.45h-2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".65"/>
+    </symbol>
+    <symbol id="ico-system" viewBox="0 0 24 24">
+      <rect x="3" y="4" width="18" height="12" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.7"/>
+      <path d="M8 20h8M12 16v4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+      <path d="M7 7.5h10v5H7z" fill="currentColor" opacity=".13"/>
+    </symbol>
+    <symbol id="ico-reset" viewBox="0 0 24 24">
+      <path d="M5 8.5A8 8 0 1 1 4.2 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+      <path d="M5 4.8v3.9h3.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M12 8v4l2.6 1.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="ico-arrow-left" viewBox="0 0 24 24">
+      <path d="M14.8 5.5 8.3 12l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M9 12h8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="ico-arrow-right" viewBox="0 0 24 24">
+      <path d="m9.2 5.5 6.5 6.5-6.5 6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M15 12H7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+<a class="skip-link" href="#conteudo-principal">Ir para o conteúdo</a>
+
+<div id="drawer-fundo" onclick="fecharDrawer()"></div>
+
+<div id="drawer">
+    <div class="drawer-head">
+        <div class="drawer-brand-mark">IPDA</div>
+        <div>
+            <span class="drawer-kicker">SETORIAL CONTAGEM</span>
+            <strong>Menu principal</strong>
+        </div>
+        <button class="drawer-close" type="button" aria-label="Fechar menu" onclick="fecharDrawer()">×</button>
+    </div>
+
+    <div class="drawer-section-title">NAVEGAÇÃO</div>
+    <a class="drawer-link" href="#inicio" onclick="fecharDrawer()">
+        <span class="drawer-icon"><svg class="ui-icon" viewBox="0 0 24 24"><use href="#ico-home"></use></svg></span>
+        <span><strong>Início</strong><small>Página principal</small></span>
+        <span class="drawer-chevron">›</span>
+    </a>
+    <a class="drawer-link" href="#cultos-semanais" onclick="fecharDrawer()">
+        <span class="drawer-icon"><svg class="ui-icon" viewBox="0 0 24 24"><use href="#ico-calendar"></use></svg></span>
+        <span><strong>Cultos</strong><small>Programação semanal</small></span>
+        <span class="drawer-chevron">›</span>
+    </a>
+    <a class="drawer-link" href="#proximos-eventos" onclick="fecharDrawer()">
+        <span class="drawer-icon"><svg class="ui-icon" viewBox="0 0 24 24"><use href="#ico-event"></use></svg></span>
+        <span><strong>Próximos eventos</strong><small>Confira a programação</small></span>
+        <span class="drawer-chevron">›</span>
+    </a>
+    <a class="drawer-link" href="#oracao" onclick="fecharDrawer()">
+        <span class="drawer-icon"><svg class="ui-icon" viewBox="0 0 24 24"><use href="#ico-prayer"></use></svg></span>
+        <span><strong>Pedido de oração</strong><small>Envie seu pedido</small></span>
+        <span class="drawer-chevron">›</span>
+    </a>
+
+    <div class="drawer-section-title">MINISTÉRIOS E SERVIÇOS</div>
+
+    <div class="drawer-item drawer-link" onclick="abrirDepartamento('horarios');fecharDrawer()">
+        <span class="drawer-icon"><svg class="ui-icon" viewBox="0 0 24 24"><use href="#ico-clock"></use></svg></span>
+        <span><strong>Horários</strong><small>Veja nossos horários</small></span>
+        <span class="drawer-chevron">›</span>
+    </div>
+    <div class="drawer-item drawer-link" onclick="abrirDepartamento('transmissao');fecharDrawer()">
+        <span class="drawer-icon"><svg class="ui-icon" viewBox="0 0 24 24"><use href="#ico-live"></use></svg></span>
+        <span><strong>Transmissões</strong><small>Ao vivo e programação</small></span>
+        <span class="drawer-chevron">›</span>
+    </div>
+    <div class="drawer-item drawer-link" onclick="abrirDepartamento('galileu');fecharDrawer()">
+        <span class="drawer-icon"><svg class="ui-icon" viewBox="0 0 24 24"><use href="#ico-child"></use></svg></span>
+        <span><strong>Pequeno Galileu</strong><small>Ministério infantil</small></span>
+        <span class="drawer-chevron">›</span>
+    </div>
+    <div class="drawer-item drawer-link" onclick="abrirDepartamento('mulheres');fecharDrawer()">
+        <span class="drawer-icon"><svg class="ui-icon" viewBox="0 0 24 24"><use href="#ico-heart"></use></svg></span>
+        <span><strong>Mulheres de Fé</strong><small>Ministério de mulheres</small></span>
+        <span class="drawer-chevron">›</span>
+    </div>
+    <div class="drawer-item drawer-link" onclick="abrirDepartamento('expansao');fecharDrawer()">
+        <span class="drawer-icon"><svg class="ui-icon" viewBox="0 0 24 24"><use href="#ico-expand"></use></svg></span>
+        <span><strong>Expansão</strong><small>Conheça o trabalho</small></span>
+        <span class="drawer-chevron">›</span>
+    </div>
+    <div class="drawer-item drawer-link" onclick="abrirDepartamento('pemu');fecharDrawer()">
+        <span class="drawer-icon"><svg class="ui-icon" viewBox="0 0 24 24"><use href="#ico-users"></use></svg></span>
+        <span><strong>Projeto PEMU</strong><small>Projeto e ministério</small></span>
+        <span class="drawer-chevron">›</span>
+    </div>
+    <div class="drawer-item drawer-link" onclick="abrirDepartamento('pix');fecharDrawer()">
+        <span class="drawer-icon"><svg class="ui-icon" viewBox="0 0 24 24"><use href="#ico-give"></use></svg></span>
+        <span><strong>Ofertas e dízimos</strong><small>Contribua com a obra</small></span>
+        <span class="drawer-chevron">›</span>
+    </div>
+</div>
+
+<header id="top-header">
+    <div class="topbar">
+        <button id="menu-btn" aria-label="Abrir menu" onclick="abrirDrawer()">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="top-logo">
+            <img src="logo.png" alt="IPDA Setorial Contagem Centro">
+        </div>
+        <button id="search-btn" aria-label="Pesquisar" onclick="abrirPesquisa()">
+            <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-search"></use></svg>
+        </button>
+    </div>
+    <nav class="main-nav">
+        <a href="#inicio">INÍCIO</a>
+        <a href="#cultos-semanais">CULTOS</a>
+        <a href="#proximos-eventos">PRÓXIMOS EVENTOS</a>
+        <a href="#oracao">PEDIDO DE ORAÇÃO</a>
+    </nav>
+</header>
+
+<section class="banner" id="inicio">
+
+    <img src="fachada.jpg" class="banner-img" alt="Fachada da IPDA Setorial Contagem Centro">
+
+    <div class="banner-texto">
+
+        <h1>IPDA Setorial Contagem Centro</h1>
+
+        <p>Mais que uma igreja. Uma família.</p>
+
+        <button onclick="window.scrollTo({top:600,behavior:'smooth'})">
+            ▶ ASSISTIR AO VIVO
+        </button>
+
+    </div>
+
+</section>
+
+
+<section id="cultos-semanais" class="animar">
+    <h2>Cultos Semanais</h2>
+    <div class="slider" aria-label="Carrossel de cultos semanais">
+        <button class="slide-arrow slide-prev" type="button" aria-label="Imagem anterior" onclick="trocarSlide(-1)">
+            <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-arrow-left"></use></svg>
+        </button>
+        <img id="slide" src="01.jpg" alt="Cultos Semanais">
+        <button class="slide-arrow slide-next" type="button" aria-label="Próxima imagem" onclick="trocarSlide(1)">
+            <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-arrow-right"></use></svg>
+        </button>
+        <div class="bolinhas" aria-label="Navegação das imagens">
+            <button class="dot ativo" type="button" aria-label="Imagem 1" onclick="irParaSlide(0)"></button>
+            <button class="dot" type="button" aria-label="Imagem 2" onclick="irParaSlide(1)"></button>
+            <button class="dot" type="button" aria-label="Imagem 3" onclick="irParaSlide(2)"></button>
+            <button class="dot" type="button" aria-label="Imagem 4" onclick="irParaSlide(3)"></button>
+            <button class="dot" type="button" aria-label="Imagem 5" onclick="irParaSlide(4)"></button>
+            <button class="dot" type="button" aria-label="Imagem 6" onclick="irParaSlide(5)"></button>
+            <button class="dot" type="button" aria-label="Imagem 7" onclick="irParaSlide(6)"></button>
+        </div>
+    </div>
+</section>
+
+<div class="redes-sociais portal-redes">
+    <a href="https://youtube.com/@IPDASETORIALCONTAGEMCENTRO" target="_blank" rel="noopener" class="rede-card" aria-label="YouTube">
+        <img src="youtube.png" alt="YouTube">
+    </a>
+    <a href="https://www.instagram.com/ipda_contagem_centro?igsh=dWplZmpjbmt2bXQz" target="_blank" rel="noopener" class="rede-card" aria-label="Instagram">
+        <img src="instagram.png" alt="Instagram">
+    </a>
+</div>
+
+<div class="container" id="conteudo-principal"><div class="cards"><div id="culto" class="animar"></div>
+
+<div id="mensagem">
+    Carregando transmissão...
+
+</div>
+
+</div>
+
+<div id="oracao" class="animar">
+
+    <h2>Pedido de Oração</h2>
+
+    <input
+    id="nome"
+    placeholder="Seu nome">
+
+    <textarea
+id="pedido"
+placeholder="Digite seu pedido"
+rows="5"
+maxlength="100"></textarea>
+
+<div id="contador">0/100</div>
+
+<div id="barra-progresso">
+    <div id="barra"></div>
+</div>
+
+    <button onclick="enviarPedido()">
+        Enviar Pedido
+    </button>
+
+</div>
+
+<div id="versiculo-dia" class="animar">
+
+    <h2>Versículo do Dia</h2>
+
+    <p id="texto-versiculo"></p>
+
+    <div id="referencia-versiculo"></div>
+
+</div>
+
+<div id="conheca-igreja" class="animar">
+    <div class="igreja-imagem-wrap">
+        <img src="fachada.jpg" id="foto-igreja" alt="Fachada da IPDA Setorial Contagem Centro">
+        <span class="igreja-selo">IPDA • CONTAGEM CENTRO</span>
+    </div>
+    <div class="igreja-conteudo">
+        <span class="section-kicker">NOSSA IGREJA</span>
+        <h2>Conheça a Igreja</h2>
+        <p id="texto-igreja">
+            A Igreja Pentecostal Deus é Amor é dedicada à pregação do Evangelho de Jesus Cristo, ao ensino da Palavra de Deus e à oração.
+        </p>
+        <button onclick="abrirHistoria()">Conheça nossa história <span aria-hidden="true">→</span></button>
+    </div>
+</div>
+
+<div id="proximos-eventos" class="animar">
+
+    <h2>
+        Próximos Eventos
+    </h2>
+
+    <div class="eventos-arraste">Deslize horizontalmente para consultar a programação</div>
+
+    <div id="lista-eventos"></div>
+
+</div>
+
+</div><script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script><script>
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyC5Ylv9RyBfZ3BN5IgDWGqrldQR9yIbFRA",
+
+  authDomain: "ipda-setorial-contagem.firebaseapp.com",
+
+  databaseURL:
+  "https://ipda-setorial-contagem-default-rtdb.firebaseio.com",
+
+  projectId: "ipda-setorial-contagem",
+
+  storageBucket:
+  "ipda-setorial-contagem.appspot.com",
+
+  messagingSenderId:
+  "815344482867",
+
+  appId:
+  "1:815344482867:web:221f5624f89c1e25468146"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.database();
+
+const pedidoInput = document.getElementById("pedido");
+const contador = document.getElementById("contador");
+
+pedidoInput.addEventListener("input",()=>{
+
+const tamanho=pedidoInput.value.length;
+
+contador.innerText=tamanho+"/100";
+
+const porcentagem=tamanho;
+
+const barra=document.getElementById("barra");
+
+barra.style.width=porcentagem+"%";
+
+if(porcentagem<70){
+
+barra.style.background="#2e7d32";
+
+}else if(porcentagem<90){
+
+barra.style.background="#f9a825";
+
+}else{
+
+barra.style.background="#c62828";
+
+}
+
+});
+
+db.ref("aovivo/transmissao")
+.on("value",(snapshot)=>{
+
+    let culto = snapshot.val();
+
+    if(!culto){
+
+    document.getElementById("culto").innerHTML = "";
+
+    document.getElementById("mensagem")
+    .innerHTML = "Não há transmissões no momento.";
+
+    return;
+}
+
+    if(!culto.ativo){
+
+    document.getElementById("mensagem").innerHTML = "";
+
+    document.getElementById("culto").innerHTML = `
+
+        <div class="cartaz">
+
+            <img src="${culto.cartaz}">
+
+            <div class="aovivo"
+            style="background:#ff9800;">
+                ⏳ EM BREVE
+            </div>
+
+        </div>
+
+        <h2 style="text-align:center;">
+            ${culto.titulo}
+        </h2>
+
+    `;
+
+    return;
+}
+
+    document.getElementById("mensagem").innerHTML = "";
+
+    document.getElementById("culto")
+    .innerHTML = `
+
+        <div class="cartaz">
+
+            <img src="${culto.cartaz}">
+
+            <div class="aovivo">
+                🔴 AO VIVO
+            </div>
+
+        </div>
+
+        <h2 style="text-align:center;">
+            ${culto.titulo}
+        </h2>
+<button
+onclick="ouvirCulto('${culto.youtube}')">
+
+    ▶ OUVIR AGORA
+
+</button>
+
+<div id="player-live"></div>
+
+`;
+
+});
+
+
+function enviarPedido(){
+
+    const ultimoPedido = localStorage.getItem("pedidoEnviado");
+
+if(ultimoPedido){
+
+    const agora = new Date();
+
+    const liberacao = new Date(ultimoPedido);
+
+    liberacao.setDate(
+        liberacao.getDate() + 1
+    );
+
+    liberacao.setHours(
+        15,
+        0,
+        0,
+        0
+    );
+
+
+    if(agora < liberacao){
+
+        const hora =
+        liberacao.toLocaleTimeString(
+            "pt-BR",
+            {
+                hour:"2-digit",
+                minute:"2-digit"
+            }
+        );
+
+
+        const data =
+        liberacao.toLocaleDateString(
+            "pt-BR"
+        );
+
+
+        alert(
+        "Você já enviou um pedido.\n\n" +
+        "Será possível enviar outro dia " +
+        data +
+        " às " +
+        hora
+        );
+
+        return;
+
+    }
+
+}
+
+    const nome =
+    document.getElementById("nome").value.trim();
+
+    const pedido =
+    document.getElementById("pedido").value.trim();
+
+    if(nome === "" || pedido === ""){
+        alert("Preencha todos os campos.");
+        return;
+    }
+
+    if(pedido.length > 100){
+        alert("O pedido deve ter no máximo 100 caracteres.");
+        return;
+    }
+
+    db.ref("pedidosOracao")
+    .push({
+        nome:nome,
+        pedido:pedido,
+        data:new Date().toISOString()
+    })
+
+    .then(()=>{
+
+        localStorage.setItem(
+    "pedidoEnviado",
+    new Date()
+);
+
+        alert(
+"Apaz do Senhor Jesus!\n\n" +
+"Seu pedido de oração foi enviado com sucesso."
+);
+
+        document.getElementById("nome").value = "";
+        document.getElementById("pedido").value = "";
+
+    })
+
+    .catch((erro)=>{
+
+        console.error("Erro Firebase:", erro);
+
+        alert(
+            "Erro ao enviar pedido:\n\n" +
+            erro.message
+        );
+
+    });
+
+}
+
+function abrirDrawer(){
+
+document
+.getElementById("drawer")
+.classList.add("aberto");
+
+document
+.getElementById("drawer-fundo")
+.classList.add("aberto");
+
+}
+
+function fecharDrawer(){
+
+document
+.getElementById("drawer")
+.classList.remove("aberto");
+
+document
+.getElementById("drawer-fundo")
+.classList.remove("aberto");
+
+}
+
+function ouvirCulto(link){
+
+    let videoId = "";
+
+    if(link.includes("watch?v=")){
+        videoId = link.split("watch?v=")[1].split("&")[0];
+    }
+    else if(link.includes("youtu.be/")){
+        videoId = link.split("youtu.be/")[1].split("?")[0];
+    }
+    else if(link.includes("/live/")){
+        videoId = link.split("/live/")[1].split("?")[0];
+    }
+
+    if(!videoId){
+        alert("Link do YouTube inválido.");
+        return;
+    }
+
+    document.getElementById("player-live").innerHTML = `
+        <div style="
+            margin-top:20px;
+            position:relative;
+            padding-bottom:56.25%;
+            height:0;
+            overflow:hidden;
+            border-radius:15px;
+            box-shadow:0 2px 10px rgba(0,0,0,.2);
+        ">
+            <iframe
+                src="https://www.youtube.com/embed/${videoId}?autoplay=1"
+                frameborder="0"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                style="
+                    position:absolute;
+                    top:0;
+                    left:0;
+                    width:100%;
+                    height:100%;
+                ">
+            </iframe>
+        </div>
+    `;
+}
+
+const imagens = [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg",
+    "07.jpg"
+];
+
+imagens.forEach(src => {
+    const img = new Image();
+    img.src = src;
+});
+let slideAtual = 0;
+
+function atualizarIndicadores(){
+    document.querySelectorAll(".dot").forEach((dot,index)=>{
+        dot.classList.toggle("ativo", index === slideAtual);
+        dot.setAttribute("aria-current", index === slideAtual ? "true" : "false");
+    });
+}
+
+function mostrarSlide(indice, animar=true){
+    const slide=document.getElementById("slide");
+    if(!slide) return;
+
+    slideAtual=(indice + imagens.length) % imagens.length;
+
+    if(!animar){
+        slide.src=imagens[slideAtual];
+        atualizarIndicadores();
+        return;
+    }
+
+    slide.classList.add("trocando");
+    setTimeout(()=>{
+        slide.src=imagens[slideAtual];
+        atualizarIndicadores();
+        slide.onload=()=>slide.classList.remove("trocando");
+        if(slide.complete) setTimeout(()=>slide.classList.remove("trocando"),120);
+    },140);
+}
+
+function trocarSlide(direcao=1){
+    mostrarSlide(slideAtual + direcao);
+}
+
+function irParaSlide(indice){
+    mostrarSlide(indice);
+}
+
+setInterval(()=>trocarSlide(1),5000);
+
+const versiculos = [
+
+{
+texto:"Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito.",
+ref:"João 3:16"
+},
+
+{
+texto:"O Senhor é o meu pastor; nada me faltará.",
+ref:"Salmos 23:1"
+},
+
+{
+texto:"Tudo posso naquele que me fortalece.",
+ref:"Filipenses 4:13"
+},
+
+{
+texto:"Buscai ao Senhor enquanto se pode achar.",
+ref:"Isaías 55:6"
+},
+
+{
+texto:"Perto está o Senhor de todos os que o invocam.",
+ref:"Salmos 145:18"
+},
+
+{
+texto:"A alegria do Senhor é a vossa força.",
+ref:"Neemias 8:10"
+},
+
+{
+texto:"Entrega o teu caminho ao Senhor; confia nele.",
+ref:"Salmos 37:5"
+},
+
+{
+texto:"Bem-aventurados os limpos de coração.",
+ref:"Mateus 5:8"
+},
+
+{
+texto:"Não temas, porque eu sou contigo.",
+ref:"Isaías 41:10"
+},
+
+{
+texto:"Clama a mim, e responder-te-ei.",
+ref:"Jeremias 33:3"
+},
+
+{
+texto:"O choro pode durar uma noite, mas a alegria vem pela manhã.",
+ref:"Salmos 30:5"
+},
+
+{
+texto:"Lâmpada para os meus pés é tua palavra.",
+ref:"Salmos 119:105"
+},
+
+{
+texto:"Se Deus é por nós, quem será contra nós?",
+ref:"Romanos 8:31"
+},
+
+{
+texto:"O meu socorro vem do Senhor.",
+ref:"Salmos 121:2"
+},
+
+{
+texto:"Sede fortes e corajosos.",
+ref:"Josué 1:9"
+}
+
+];
+
+let intervaloEventos = null;
+
+function iniciarContadores(eventos){
+
+    if(intervaloEventos){
+        clearInterval(intervaloEventos);
+    }
+
+    intervaloEventos = setInterval(()=>{
+
+        eventos.forEach((evento,index)=>{
+
+            let alvo =
+            new Date(
+                evento.data +
+                "T" +
+                evento.hora
+            );
+
+            let diff =
+            alvo - new Date();
+
+            if(diff <= 0){
+
+                atualizarEventos(eventos);
+
+                return;
+
+            }
+
+            let dias =
+            Math.floor(diff / 86400000);
+
+            let horas =
+            Math.floor(
+                (diff % 86400000)
+                / 3600000
+            );
+
+            let minutos =
+            Math.floor(
+                (diff % 3600000)
+                / 60000
+            );
+
+            let segundos =
+            Math.floor(
+                (diff % 60000)
+                / 1000
+            );
+
+            let texto = "Inicia em ";
+
+            if(dias > 0){
+
+                texto +=
+                    dias + "d " +
+                    horas + "h " +
+                    minutos + "m " +
+                    segundos + "s";
+
+            }else if(horas > 0){
+
+                texto +=
+                    horas + "h " +
+                    minutos + "m " +
+                    segundos + "s";
+
+            }else if(minutos > 0){
+
+                texto +=
+                    minutos + "m " +
+                    segundos + "s";
+
+            }else{
+
+                texto +=
+                    segundos + "s";
+
+            }
+
+            const contador =
+            document.getElementById(
+                "contador-" + index
+            );
+
+            if(contador){
+                contador.innerHTML = texto;
+            }
+
+        });
+
+    },1000);
+
+}
+
+function renderizarEventos(eventos){
+
+    let html = "";
+
+    eventos.forEach((evento,index)=>{
+
+        html += `
+
+        <div class="evento-card">
+
+            <img src="${evento.imagem}">
+
+            <div class="evento-info">
+
+                <div class="evento-nome">
+                    ${evento.nome}
+                </div>
+
+                <div
+                    class="evento-contador"
+                    id="contador-${index}">
+                </div>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+    document.getElementById(
+        "lista-eventos"
+    ).innerHTML = html;
+
+    iniciarContadores(eventos);
+
+}
+
+    function atualizarEventos(eventos){
+
+    let agora = new Date();
+
+    eventos = eventos.filter(evento=>{
+
+        let dataEvento =
+        new Date(
+            evento.data +
+            "T" +
+            evento.hora
+        );
+
+        return dataEvento > agora;
+
+    });
+
+    eventos.sort((a,b)=>{
+
+        let da =
+        new Date(a.data + "T" + a.hora);
+
+        let dbb =
+        new Date(b.data + "T" + b.hora);
+
+        return da - dbb;
+
+    });
+
+    eventos = eventos.slice(0,3);
+
+    renderizarEventos(eventos);
+
+}
+
+function carregarVersiculoDoDia(){
+
+    const hoje = new Date();
+
+    const inicioAno =
+        new Date(hoje.getFullYear(),0,1);
+
+    const diaDoAno =
+        Math.floor(
+            (hoje - inicioAno) /
+            86400000
+        );
+
+    const indice =
+        diaDoAno % versiculos.length;
+
+    document.getElementById(
+        "texto-versiculo"
+    ).innerText =
+        '"' +
+        versiculos[indice].texto +
+        '"';
+
+    document.getElementById(
+        "referencia-versiculo"
+    ).innerText =
+        versiculos[indice].ref;
+}
+
+carregarVersiculoDoDia();
+
+db.ref("eventos").on("value",(snapshot)=>{
+
+    let eventos = [];
+
+    snapshot.forEach(child=>{
+
+        eventos.push(child.val());
+
+    });
+
+    atualizarEventos(eventos);
+
+});
+
+function abrirTrabalhos(){
+
+    document.getElementById(
+        "modal-trabalhos"
+    ).style.display = "block";
+
+}
+
+function fecharTrabalhos(){
+
+    document.getElementById(
+        "modal-trabalhos"
+    ).style.display = "none";
+
+}
+
+function fecharDepartamento(){
+
+    document.getElementById(
+        "modal-departamento"
+    ).style.display = "none";
+
+}
+
+function abrirDepartamento(nome){
+
+    const dados = {
+
+        galileu:{
+            titulo:"Pequeno Galileu",
+            fotos:[
+                "pequenogalileu1.jpg",
+                "pequenogalileu2.jpg"
+            ]
+        },
+
+        mulheres:{
+            titulo:"Mulheres de Fé",
+            fotos:[
+                "mulheresdefe1.jpg",
+                "mulheresdefe2.jpg"
+            ]
+        },
+
+        expansao:{
+            titulo:"Expansão",
+            fotos:[
+                "expansao1.jpg",
+                "expansao2.jpg"
+            ]
+        },
+
+        pemu:{
+            titulo:"Projeto PEMU",
+            fotos:[
+                "pemu1.jpg",
+                "pemu2.jpg"
+            ]
+        },
+
+transmissao:{
+    titulo:"Dias de Transmissão",
+    fotos:[]
+
+},
+
+horarios:{
+    titulo:"Horários dos Cultos",
+    fotos:[]
+},
+
+pix:{
+    titulo:"Deseja Ofertar / Dizimar?",
+    fotos:[]
+}
+
+    };
+
+    let dep = dados[nome];
+
+if(nome === "transmissao"){
+
+    document.getElementById(
+        "titulo-departamento"
+    ).innerHTML = "Dias de Transmissão";
+
+    document.getElementById(
+        "fotos-departamento"
+    ).innerHTML = `
+        <div style="padding:20px;font-size:20px;line-height:2;">
+            📅 Terça-feira: 19H00<br>
+            📅 Sexta-feira: 19H00<br>
+            📅 Domingo: 19H00
+        </div>
+    `;
+
+    document.getElementById(
+        "modal-departamento"
+    ).style.display = "block";
+
+    return;
+}
+
+if(nome === "horarios"){
+
+    document.getElementById(
+        "titulo-departamento"
+    ).innerHTML = "Horários dos Cultos";
+
+    document.getElementById(
+        "fotos-departamento"
+    ).innerHTML = `
+        <div style="padding:20px;font-size:20px;line-height:2;">
+            📅 <strong>Domingo:</strong> 08H00 e 19H00<br>
+            📅 <strong>Segunda-feira:</strong> 08H00, 15H00 e 19H00<br>
+            📅 <strong>Terça-feira:</strong> 08H00, 15H00 e 19H00<br>
+            📅 <strong>Quarta-feira:</strong> 08H00, 15H00 e 19H00<br>
+            📅 <strong>Quinta-feira:</strong> 19H00<br>
+            📅 <strong>Sexta-feira:</strong> 08H00, 15H00 e 19H00<br>
+            📅 <strong>Sábado:</strong> 19H00
+        </div>
+    `;
+
+    document.getElementById(
+        "modal-departamento"
+    ).style.display = "block";
+
+    return;
+}
+
+if(nome === "pix"){
+
+    document.getElementById(
+        "titulo-departamento"
+    ).innerHTML = "Deseja Ofertar / Dizimar?";
+
+    document.getElementById(
+        "fotos-departamento"
+    ).innerHTML = `
+
+        <div style="width:100%;text-align:center;padding:20px;">
+
+            <div style="
+    width:100%;
+    max-width:320px;
+    margin:0 auto 20px;
+    padding:12px;
+    border:2px solid #1565c0;
+    border-radius:15px;
+    background:#fff;
+">
+
+    <img
+    src="logo.png"
+    style="
+        width:100%;
+        height:auto;
+        display:block;
+    ">
+
+</div>
+
+            <div style="
+                width:260px;
+                height:260px;
+                margin:0 auto 20px;
+                border:3px dashed #1565c0;
+                border-radius:15px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                overflow:hidden;
+                background:#fff;
+            ">
+
+                <img src="qr.png"
+                style="max-width:100%;max-height:100%;">
+
+            </div>
+
+            <div style="
+                font-size:20px;
+                font-weight:bold;
+                margin-bottom:20px;
+            ">
+                CNPJ: 43.208.040/0001-36
+            </div>
+
+            <div style="
+                font-size:24px;
+                font-weight:bold;
+                color:#0d47a1;
+                margin-bottom:10px;
+            ">
+                Enviar o comprovante para:
+            </div>
+
+            <a
+            href="https://wa.me/5531986775326"
+            target="_blank"
+            style="
+                font-size:24px;
+                font-weight:bold;
+                color:#25D366;
+                text-decoration:none;
+            ">
+                (31) 9 8677-5326
+            </a>
+
+        </div>
+
+    `;
+
+    document.getElementById(
+        "modal-departamento"
+    ).style.display = "block";
+
+    return;
+}
+
+    document.getElementById(
+        "titulo-departamento"
+    ).innerHTML = dep.titulo;
+
+    document.getElementById(
+        "fotos-departamento"
+    ).innerHTML = `
+
+        <img src="${dep.fotos[0]}">
+
+        <img src="${dep.fotos[1]}">
+
+    `;
+
+    document.getElementById(
+        "modal-departamento"
+    ).style.display = "block";
+
+}
+
+function abrirHistoria(){
+    document.getElementById("modal-historia").style.display="block";
+    document.body.style.overflow="hidden";
+}
+
+function fecharHistoria(){
+    document.getElementById("modal-historia").style.display="none";
+    document.body.style.overflow="";
+}
+
+function abrirMapa(){
+
+window.open(
+"https://www.google.com/maps/place/Av.+Jo%C3%A3o+de+Deus+Costa,+300a+-+Centro,+Contagem+-+MG,+32040-652/",
+"_blank"
+);
+
+}
+
+const observador = new IntersectionObserver((itens)=>{
+
+    itens.forEach(item=>{
+
+        if(item.isIntersecting){
+
+            item.target.classList.add("mostrar");
+
+        }
+
+    });
+
+},{
+    threshold:.15
+});
+
+document
+.querySelectorAll(".animar")
+.forEach(item=>{
+
+    observador.observe(item);
+
+});
+
+</script>
+
+<!-- ===== PAINEL DE APARÊNCIA ===== -->
+<button id="appearance-trigger" class="appearance-trigger" type="button"
+        aria-label="Abrir opções de aparência" aria-controls="appearance-panel" aria-expanded="false">
+    <svg class="ui-icon ui-icon-lg" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-settings"></use></svg>
+</button>
+
+<div id="appearance-panel" class="appearance-panel" aria-hidden="true">
+    <div class="appearance-head">
+        <div>
+            <span class="appearance-kicker">PERSONALIZAÇÃO</span>
+            <h2>Aparência</h2>
+        </div>
+        <button id="appearance-close" class="appearance-close" type="button" aria-label="Fechar opções de aparência">×</button>
+    </div>
+
+    <div class="appearance-section">
+        <span class="appearance-label">Tema</span>
+        <div class="segmented-control" role="group" aria-label="Tema">
+            <button type="button" data-theme-choice="light"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-sun"></use></svg> Claro</button>
+            <button type="button" data-theme-choice="dark"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-moon"></use></svg> Escuro</button>
+            <button type="button" data-theme-choice="system"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-system"></use></svg> Sistema</button>
+        </div>
+    </div>
+
+    <div class="appearance-section">
+        <span class="appearance-label">Fonte</span>
+        <div class="font-grid">
+            <button type="button" data-font="Inter" style="font-family:Inter,sans-serif">Inter</button>
+            <button type="button" data-font="Poppins" style="font-family:Poppins,sans-serif">Poppins</button>
+            <button type="button" data-font="Montserrat" style="font-family:Montserrat,sans-serif">Montserrat</button>
+            <button type="button" data-font="System" style="font-family:system-ui,sans-serif">Sistema</button>
+        </div>
+    </div>
+
+    <div class="appearance-section">
+        <div class="appearance-row">
+            <span class="appearance-label">Tamanho do texto</span>
+            <span id="font-size-value" class="setting-value">100%</span>
+        </div>
+        <div class="range-wrap">
+            <button type="button" class="range-step" data-font-step="-1" aria-label="Diminuir fonte">A−</button>
+            <input id="font-size-range" type="range" min="90" max="120" step="5" value="100"
+                   aria-label="Tamanho do texto">
+            <button type="button" class="range-step" data-font-step="1" aria-label="Aumentar fonte">A+</button>
+        </div>
+    </div>
+
+    <div class="appearance-section">
+        <div class="appearance-toggle-row">
+            <div>
+                <span class="appearance-label">Alto contraste</span>
+                <small>Realça bordas e textos para facilitar a leitura.</small>
+            </div>
+            <label class="switch">
+                <input id="contrast-toggle" type="checkbox">
+                <span class="switch-slider"></span>
+            </label>
+        </div>
+
+        <div class="appearance-toggle-row">
+            <div>
+                <span class="appearance-label">Menos movimento</span>
+                <small>Reduz animações e transições da interface.</small>
+            </div>
+            <label class="switch">
+                <input id="motion-toggle" type="checkbox">
+                <span class="switch-slider"></span>
+            </label>
+        </div>
+    </div>
+
+    <button id="appearance-reset" class="appearance-reset" type="button">
+        <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-reset"></use></svg> Restaurar padrão
+    </button>
+</div>
+
+<div id="appearance-backdrop" class="appearance-backdrop"></div>
+
+<footer>
+
+<img src="logo.png" style="max-width:280px">
+
+<h2>IPDA Setorial Contagem Centro</h2>
+
+<p>
+Av. João de Deus Costa, 300A
+</p>
+
+<p>
+Centro - Contagem/MG
+</p>
+
+<p>
+(31) 98677-5326
+</p>
+
+<p class="footer-email">
+✉️ contato@sitesetorialcontagem.com.br
+</p>
+
+<div class="footer-identidade">
+    <strong>IPDA Setorial Contagem Centro</strong>
+    <span>Mais que uma igreja. Uma família.</span>
+</div>
+
+<button onclick="abrirMapa()">
+Abrir no Google Maps
+</button>
+
+</footer>
+
+<div id="modal-trabalhos">
+
+    <div class="modal-conteudo">
+
+        <span class="fechar"
+        onclick="fecharTrabalhos()">
+            ×
+        </span>
+
+        <h2>Nossos Trabalhos</h2>
+
+        <div
+        class="item-trabalho"
+        onclick="abrirDepartamento('galileu')">
+            Pequeno Galileu
+        </div>
+
+        <div
+        class="item-trabalho"
+        onclick="abrirDepartamento('mulheres')">
+            Mulheres de Fé
+        </div>
+
+        <div
+        class="item-trabalho"
+        onclick="abrirDepartamento('expansao')">
+            Expansão
+        </div>
+
+        <div
+        class="item-trabalho"
+        onclick="abrirDepartamento('pemu')">
+            Projeto PEMU
+        </div>
+
+<div
+class="item-trabalho"
+onclick="abrirDepartamento('transmissao')">
+    Dias de Transmissão
+</div>
+
+<div
+class="item-trabalho"
+onclick="abrirDepartamento('horarios')">
+    Horários dos Cultos
+</div>
+
+<div
+class="item-trabalho"
+onclick="abrirDepartamento('pix')">
+    Deseja Ofertar / Dizimar?
+</div>
+
+    </div>
+
+</div>
+
+<div id="modal-departamento">
+
+    <div class="modal-conteudo">
+
+        <span class="fechar"
+        onclick="fecharDepartamento()">
+            ×
+        </span>
+
+        <h2 id="titulo-departamento"></h2>
+
+        <div
+        id="fotos-departamento"
+        class="fotos-departamento">
+        </div>
+
+    </div>
+
+</div>
+
+<div id="modal-historia" class="modal">
+
+<div class="modal-conteudo">
+
+<span class="fechar" onclick="fecharHistoria()">
+
+×
+
+</span>
+
+<h2>Nossa História</h2>
+
+<p>
+
+A Igreja Pentecostal Deus é Amor (IPDA) foi fundada em 3 de junho de 1962 pelo Missionário David Miranda, na cidade de São Paulo. Desde sua fundação, a igreja tem como objetivo anunciar o Evangelho de Jesus Cristo, incentivar a oração, o estudo da Bíblia e a vida cristã, alcançando pessoas por meio da pregação e da evangelização.
+
+Ao longo dos anos, a IPDA expandiu suas atividades para diversas cidades do Brasil e também para outros países, estabelecendo congregações dedicadas à evangelização, ao ensino da Palavra de Deus e ao atendimento espiritual de seus fiéis.
+
+A IPDA Setorial Contagem Centro faz parte dessa missão, buscando servir à comunidade com cultos, oração, evangelização e ações voltadas ao fortalecimento da fé cristã. Nosso compromisso é receber todas as pessoas com amor, respeito e dedicação, anunciando a mensagem de salvação por meio de Jesus Cristo.
+
+Seja bem-vindo(a)! É uma alegria receber sua visita. Esperamos que este site seja um canal de bênçãos e informações sobre nossa igreja e nossas atividades.
+
+</p>
+
+</div>
+
+</div>
+
+
+<!-- Pesquisa -->
+<div id="modal-pesquisa" onclick="fecharPesquisa(event)">
+    <div class="pesquisa-caixa" onclick="event.stopPropagation()">
+        <button class="pesquisa-fechar" onclick="fecharPesquisa()">×</button>
+        <h3>Pesquisar no site</h3>
+        <input id="campo-pesquisa" type="search" placeholder="Digite o que você procura..." onkeydown="if(event.key==='Enter') pesquisarSite()">
+        <button onclick="pesquisarSite()">Pesquisar</button>
+    </div>
+</div>
+
+<!-- Cookies -->
+<div id="cookie-banner">
+    <p>Este site utiliza cookies para melhorar sua experiência de navegação.</p>
+    <button id="cookie-ok" onclick="aceitarCookies()">OK</button>
+</div>
+
+<script>
+function abrirPesquisa(){
+    document.getElementById('modal-pesquisa').classList.add('aberto');
+    setTimeout(()=>document.getElementById('campo-pesquisa').focus(),100);
+}
+function fecharPesquisa(event){
+    if(event && event.target !== document.getElementById('modal-pesquisa')) return;
+    document.getElementById('modal-pesquisa').classList.remove('aberto');
+}
+function pesquisarSite(){
+    const termo=document.getElementById('campo-pesquisa').value.trim().toLowerCase();
+    if(!termo) return;
+    const elementos=document.querySelectorAll('h1,h2,h3,p,.evento-nome,.drawer-item');
+    let encontrado=null;
+    elementos.forEach(el=>{ if(!encontrado && el.textContent.toLowerCase().includes(termo)) encontrado=el; });
+    if(encontrado){
+        fecharPesquisa();
+        encontrado.scrollIntoView({behavior:'smooth',block:'center'});
+        encontrado.style.outline='3px solid #49a1df';
+        setTimeout(()=>encontrado.style.outline='',1800);
+    }else alert('Nenhum resultado encontrado.');
+}
+function aceitarCookies(){
+    localStorage.setItem('cookiesAceitos','1');
+    document.getElementById('cookie-banner').style.display='none';
+}
+if(localStorage.getItem('cookiesAceitos')==='1') document.getElementById('cookie-banner').style.display='none';
+</script>
+
+
+
+
+
+
+<script>
+/* ===== PERSONALIZAÇÃO DA INTERFACE ===== */
+(function(){
+    const root = document.documentElement;
+    const body = document.body;
+    const panel = document.getElementById('appearance-panel');
+    const backdrop = document.getElementById('appearance-backdrop');
+    const trigger = document.getElementById('appearance-trigger');
+    const close = document.getElementById('appearance-close');
+    const range = document.getElementById('font-size-range');
+    const rangeValue = document.getElementById('font-size-value');
+    const contrast = document.getElementById('contrast-toggle');
+    const motion = document.getElementById('motion-toggle');
+
+    const defaults = {
+        theme: 'light',
+        font: 'Inter',
+        size: 100,
+        contrast: false,
+        motion: false
+    };
+
+    function readSettings(){
+        try{
+            return JSON.parse(localStorage.getItem('ipdaAparencia')) || {...defaults};
+        }catch(e){
+            return {...defaults};
+        }
+    }
+
+    function save(settings){
+        localStorage.setItem('ipdaAparencia', JSON.stringify(settings));
+    }
+
+    function registerBaseFontSizes(){
+        if(!window.__ipdaBaseFontSizes){
+            window.__ipdaBaseFontSizes = new WeakMap();
+        }
+
+        const scale = Number(document.documentElement.style.getPropertyValue('--font-scale')) || 1;
+        document.querySelectorAll('body *').forEach(el => {
+            if(el.closest('svg')) return;
+            if(window.__ipdaBaseFontSizes.has(el)) return;
+
+            /* Guarda o tamanho original de TODOS os elementos. Assim, qualquer texto
+               dentro deles (inclusive botões, labels, inputs e conteúdo dinâmico)
+               acompanha o controle de tamanho da fonte. */
+            const computed = parseFloat(getComputedStyle(el).fontSize);
+            if(Number.isFinite(computed)){
+                window.__ipdaBaseFontSizes.set(el, computed / scale);
+            }
+        });
+    }
+
+    function applyTextScale(){
+        registerBaseFontSizes();
+        const scale = Number(document.documentElement.style.getPropertyValue('--font-scale')) || 1;
+
+        document.querySelectorAll('body *').forEach(el => {
+            const base = window.__ipdaBaseFontSizes && window.__ipdaBaseFontSizes.get(el);
+            if(base) el.style.fontSize = (base * scale).toFixed(3) + 'px';
+        });
+    }
+
+    let updatingTextScale = false;
+    const textScaleObserver = new MutationObserver(() => {
+        if(updatingTextScale) return;
+        updatingTextScale = true;
+        requestAnimationFrame(() => {
+            applyTextScale();
+            updatingTextScale = false;
+        });
+    });
+
+    function apply(settings){
+        root.dataset.theme = settings.theme;
+        root.style.setProperty('--font-scale', (settings.size / 100).toFixed(2));
+
+        /* Escala absolutamente todos os textos HTML, inclusive controles e conteúdo
+           criado dinamicamente (eventos, modais etc.). */
+        applyTextScale();
+
+        const fonts = {
+            Inter: 'Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif',
+            Poppins: 'Poppins,Inter,system-ui,sans-serif',
+            Montserrat: 'Montserrat,Inter,system-ui,sans-serif',
+            System: 'system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif'
+        };
+
+        root.style.setProperty('--font-family', fonts[settings.font] || fonts.Inter);
+        body.classList.toggle('high-contrast', !!settings.contrast);
+        body.classList.toggle('reduced-motion', !!settings.motion);
+
+        range.value = settings.size;
+        rangeValue.textContent = settings.size + '%';
+        contrast.checked = !!settings.contrast;
+        motion.checked = !!settings.motion;
+
+        document.querySelectorAll('[data-theme-choice]').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.themeChoice === settings.theme);
+        });
+
+        document.querySelectorAll('[data-font]').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.font === settings.font);
+        });
+
+        const metaTheme = document.querySelector('meta[name="theme-color"]');
+        if(metaTheme){
+            metaTheme.content = settings.theme === 'dark' ? '#0c151c' : '#155a86';
+        }
+    }
+
+    textScaleObserver.observe(document.body, {childList:true, subtree:true});
+
+    function current(){
+        return readSettings();
+    }
+
+    function update(changes){
+        const settings = {...current(), ...changes};
+        save(settings);
+        apply(settings);
+    }
+
+    function openPanel(){
+        panel.classList.add('open');
+        backdrop.classList.add('open');
+        trigger.setAttribute('aria-expanded','true');
+        panel.setAttribute('aria-hidden','false');
+    }
+
+    function closePanel(){
+        panel.classList.remove('open');
+        backdrop.classList.remove('open');
+        trigger.setAttribute('aria-expanded','false');
+        panel.setAttribute('aria-hidden','true');
+    }
+
+    trigger.addEventListener('click', () => {
+        panel.classList.contains('open') ? closePanel() : openPanel();
+    });
+
+    close.addEventListener('click', closePanel);
+    backdrop.addEventListener('click', closePanel);
+
+    document.querySelectorAll('[data-theme-choice]').forEach(btn => {
+        btn.addEventListener('click', () => update({theme: btn.dataset.themeChoice}));
+    });
+
+    document.querySelectorAll('[data-font]').forEach(btn => {
+        btn.addEventListener('click', () => update({font: btn.dataset.font}));
+    });
+
+    range.addEventListener('input', () => update({size: Number(range.value)}));
+
+    document.querySelectorAll('[data-font-step]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const settings = current();
+            const next = Math.max(90, Math.min(120, settings.size + Number(btn.dataset.fontStep) * 5));
+            update({size: next});
+        });
+    });
+
+    contrast.addEventListener('change', () => update({contrast: contrast.checked}));
+    motion.addEventListener('change', () => update({motion: motion.checked}));
+
+    document.getElementById('appearance-reset').addEventListener('click', () => {
+        save({...defaults});
+        apply({...defaults});
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if(event.key === 'Escape'){
+            closePanel();
+        }
+    });
+
+    apply(current());
+})();
+</script>
+
+</body>
+</html>
